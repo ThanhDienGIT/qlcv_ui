@@ -1,0 +1,39 @@
+.cssLabel {
+     padding-left: 4px;
+     padding-right: 4px;
+     height: 30px;
+     border: 1px dashed gray;
+     border-radius: 5px;
+}
+
+.cssLabel2 {
+     padding: 3px;
+     height: 30px;
+     background-color: gray;
+     border-radius: 5px;
+     color: white;
+}
+
+.cssLabel3 {
+     padding-left: 4px;
+     padding-right: 4px;
+     height: 30px;
+     border: 1px dashed gray;
+     border-radius: 5px;
+     font-size: 12px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.cssLabel4 {
+     padding: 3px;
+     height: 30px;
+     background-color: gray;
+     border-radius: 5px;
+     color: white;
+     font-size: 12px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
