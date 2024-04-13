@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Divider, InputAdornment, List, ListItem, ListItemButton, ListItemIcon, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 function AssignmentMain() {
 
@@ -10,6 +10,86 @@ function AssignmentMain() {
      };
 
 
+     const [listMission, setListMission] = React.useState([
+          {
+               id: 1,
+               name: 'Soạn thảo nghị quyết',
+               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
+               leader: true,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 2,
+               name: 'Soạn thảo công văn trình lãnh đạo',
+               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
+               leader: true,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 3,
+               name: 'Tham dự tập huấn cán bộ',
+               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
+               leader: true,
+               specialize: false,
+               support: false,
+          },
+          {
+               id: 4,
+               name: 'Chủ trì dự thảo tập huấn',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 5,
+               name: 'Họp chi bộ',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 6,
+               name: 'Tham gia học nghị quyết',
+               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+     ])
+
+     const [listDeparment, setListDeparment] = useState([
+          {
+               id: 1,
+               name: 'Ban Tổ chức Tỉnh ủy'
+          },
+          {
+               id: 2,
+               name: 'Ban Dân vận Tỉnh ủy'
+          },
+          {
+               id: 3,
+               name: 'Ban Tuyên giáo Tỉnh ủy'
+          },
+          {
+               id: 4,
+               name: 'Văn phòng Tỉnh ủy'
+          },
+          {
+               id: 5,
+               name: 'Ủy ban Kiểm tra Tỉnh ủy'
+          },
+          {
+               id: 6,
+               name: 'Tỉnh đoàn'
+          },
+     ])
+
+
+
      return (
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
                <Box>
@@ -18,7 +98,7 @@ function AssignmentMain() {
                </Box>
                <Box width={'100%'} padding={3} display={'flex'} >
 
-                    <Box width={520} height={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} >
+                    <Box width={'49%'} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} >
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -28,54 +108,34 @@ function AssignmentMain() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35 }}>
+                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35, backgroundColor: '#e3e3e3' }}>
                                         <ListItemIcon>
                                              Tên phòng ban
                                         </ListItemIcon>
                                    </ListItem>
-                                   <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
-                                        selected={selectedIndex === 0}
-                                        onClick={(event) => handleListItemClick(event, 0)}
-                                   >
-                                        <ListItemIcon>
-                                             Phòng lãnh đạo
-                                        </ListItemIcon>
-                                   </ListItemButton>
-                                   <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
-                                        selected={selectedIndex === 1}
-                                        onClick={(event) => handleListItemClick(event, 1)}
-                                   >
-                                        <ListItemIcon>
-                                             Phòng đầu tư
-                                        </ListItemIcon>
-                                   </ListItemButton>
-                                   <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
-                                        selected={selectedIndex === 2}
-                                        onClick={(event) => handleListItemClick(event, 2)}
-                                   >
-                                        <ListItemIcon>
-                                             Phòng kế hoạch
-                                        </ListItemIcon>
-                                   </ListItemButton>
-                                   <ListItemButton
-                                        selected={selectedIndex === 3}
-                                        onClick={(event) => handleListItemClick(event, 3)}
-                                   >
-                                        <ListItemIcon>
-                                             Phòng công tác
-                                        </ListItemIcon>
-                                   </ListItemButton>
+                                   {listDeparment && listDeparment.length > 0 ?
+                                        listDeparment.map(ele => {
+                                             return (
+                                                  <ListItemButton
+                                                       sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                                       selected={selectedIndex === ele.id}
+                                                       onClick={(event) => handleListItemClick(event, ele.id)}
+                                                  >
+                                                       <ListItemIcon>
+                                                            {ele.name}
+                                                       </ListItemIcon>
+                                                  </ListItemButton>
+                                             )
+                                        })
+                                        : ""}
 
                               </List>
                          </Box>
-                         <Box width={'100%'} height={'130px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
+                         <Box width={'100%'} height={'200px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
 
                               <Box display={'flex'} alignItems={'center'} >
                                    <Typography>
-                                        Tổng số 4 phòng ban
+                                        Tổng số {listDeparment && listDeparment.length} phòng ban
                                    </Typography>
                                    <Box width={'30px'} height={'35px'} backgroundColor={'white'} display={'flex'}
                                         alignItems={'center'} justifyContent={'center'} border={'1px solid gray'}
@@ -100,7 +160,7 @@ function AssignmentMain() {
 
                          </Box>
                     </Box>
-                    <Box width={520} height={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} marginLeft={3}>
+                    <Box width={'49%'} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} marginLeft={3}>
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -109,8 +169,8 @@ function AssignmentMain() {
                               <Button sx={{ marginLeft: 1 }} variant='outlined' >Tìm kiếm</Button>
                          </Box>
                          <Box>
-                              <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray' }}>
-                                   <ListItem sx={{ fontSize: 15, backgroundColor: 'white', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                              <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
+                                   <ListItem sx={{ fontSize: 15, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', backgroundColor: '#e3e3e3' }}>
                                         <ListItemIcon>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>
@@ -118,46 +178,27 @@ function AssignmentMain() {
                                              Chọn
                                         </ListItemIcon>
                                    </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 1
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 2
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 3
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 4
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-
+                                   {listMission && listMission.length > 0 ?
+                                        listMission.map(ele => {
+                                             return (
+                                                  <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                                                       <ListItemIcon>
+                                                            {ele.name}
+                                                       </ListItemIcon>
+                                                       <ListItemIcon>
+                                                            <Checkbox size={'small'}></Checkbox>
+                                                       </ListItemIcon>
+                                                  </ListItem>
+                                             )
+                                        })
+                                        : ""}
                               </List>
                          </Box>
-                         <Box width={'100%'} height={'130px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
+                         <Box width={'100%'} height={'200px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
 
                               <Box display={'flex'} alignItems={'center'} >
                                    <Typography>
-                                        Tổng số 4 nhiệm vụ
+                                        Tổng số {listMission && listMission.length} nhiệm vụ
                                    </Typography>
                                    <Box width={'30px'} height={'35px'} backgroundColor={'white'} display={'flex'}
                                         alignItems={'center'} justifyContent={'center'} border={'1px solid gray'}

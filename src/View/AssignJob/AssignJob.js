@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Divider, InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Collapse, Divider, InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import SettingsIcon from '@mui/icons-material/Settings';
 import '../../CSS/AssignJob.css'
@@ -10,6 +10,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,61 +35,237 @@ function AssignJob() {
           },
      }));
 
+
+     const [datawork, setDataWork] = React.useState([
+          {
+               id: 1,
+               name: 'Soạn thảo nghị quyết',
+               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
+               leader: true,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 2,
+               name: 'Soạn thảo công văn trình lãnh đạo',
+               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
+               leader: true,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 3,
+               name: 'Tham dự tập huấn cán bộ',
+               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
+               leader: true,
+               specialize: false,
+               support: false,
+          },
+          {
+               id: 4,
+               name: 'Chủ trì dự thảo tập huấn',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 5,
+               name: 'Họp chi bộ',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 6,
+               name: 'Tham gia học nghị quyết',
+               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+     ])
+
+
      const [data, setData] = useState([
           {
                id: 1,
-               name: 'Phòng công tác sinh viên',
+               name: 'Ban Tổ chức Tỉnh ủy',
                xulychinh: {
                     phongban: true,
-                    canhan: 'Lý Ngư'
                },
                phoihop: {
                     phongban: true,
-                    canhan: 'Châu Thâm'
                },
                theodoi: {
                     phongban: false,
-                    canhan: ''
                },
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
                ngaybatdau: '13/04/2024',
                ngayhethan: '19/04/2024'
           },
           {
                id: 2,
-               name: 'Phòng phát triển nông thôn',
+               name: 'Ban Dân vận Tỉnh ủy',
                xulychinh: {
                     phongban: true,
-                    canhan: ''
                },
                phoihop: {
-                    phongban: false,
-                    canhan: ''
+                    phongban: true,
                },
                theodoi: {
-                    phongban: true,
-                    canhan: ''
+                    phongban: false,
                },
-               ngaybatdau: '15/04/2024',
-               ngayhethan: '22/04/2024'
-          }, {
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
+               ngaybatdau: '13/04/2024',
+               ngayhethan: '19/04/2024'
+          },
+          {
                id: 3,
-               name: 'Phòng công nghệ phòng không',
+               name: 'Ban Tuyên giáo Tỉnh ủy',
                xulychinh: {
-                    phongban: false,
-                    canhan: ''
+                    phongban: true,
                },
                phoihop: {
                     phongban: true,
-                    canhan: ''
                },
                theodoi: {
-                    phongban: true,
-                    canhan: ''
+                    phongban: false,
                },
-               ngaybatdau: '21/04/2024',
-               ngayhethan: '25/04/2024'
-          }
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
+               ngaybatdau: '13/04/2024',
+               ngayhethan: '19/04/2024'
+          },
+          {
+               id: 4,
+               name: 'Văn phòng Tỉnh ủy',
+               xulychinh: {
+                    phongban: true,
+               },
+               phoihop: {
+                    phongban: true,
+               },
+               theodoi: {
+                    phongban: false,
+               },
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
+               ngaybatdau: '13/04/2024',
+               ngayhethan: '19/04/2024'
+          },
+          {
+               id: 5,
+               name: 'Ủy ban Kiểm tra Tỉnh ủy',
+               xulychinh: {
+                    phongban: true,
+               },
+               phoihop: {
+                    phongban: true,
+               },
+               theodoi: {
+                    phongban: false,
+               },
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
+               ngaybatdau: '13/04/2024',
+               ngayhethan: '19/04/2024'
+          },
+          {
+               id: 6,
+               name: 'Tỉnh đoàn',
+               xulychinh: {
+                    phongban: true,
+               },
+               phoihop: {
+                    phongban: true,
+               },
+               theodoi: {
+                    phongban: false,
+               },
+               staff: [
+                    {
+                         id: 1, name: 'Lê Chí Cường', canhan: false
+                    },
+                    {
+                         id: 2, name: 'Lê Ngọc Phụng', canhan: false
+                    },
+                    {
+                         id: 3, name: 'Trần Lê Hòa', canhan: false
+                    }
+               ],
+               open: false,
+               ngaybatdau: '13/04/2024',
+               ngayhethan: '19/04/2024'
+          },
      ])
+
+     const openCollapse = (e, ele) => {
+          var value = e.target.value
+
+          const arrFilter = [...data]
+
+          arrFilter.map(element => {
+               if (ele.id === element.id) {
+                    element.open = !element.open
+               }
+          })
+          setData(arrFilter)
+     }
+
 
 
 
@@ -104,44 +282,38 @@ function AssignJob() {
                               <Typography flex={1}>Lãnh đạo giao việc: *</Typography>
 
                               <Select
-                                   value={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
                               >
                                    <MenuItem value={1}>
-                                        Nguyễn Trần Thanh Điền
+                                        Trương Văn Xuân
                                    </MenuItem>
                                    <MenuItem value={2}>
-                                        Văn Nguyễn Duy Tân
+                                        Lê Hùng Ngọc
                                    </MenuItem>
                                    <MenuItem value={3}>
-                                        Bùi Việt Anh
-                                   </MenuItem>
-                                   <MenuItem value={4}>
-                                        Nguyễn Danh Hưng
+                                        Nguyễn Trịnh Công
                                    </MenuItem>
                               </Select>
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Nhiệm vụ: *</Typography>
                               <Select
-                                   value={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
                               >
-                                   <MenuItem value={1}>
-                                        Nhiệm vụ 1
-                                   </MenuItem>
-                                   <MenuItem value={2}>
-                                        Nhiệm vụ 2
-                                   </MenuItem>
-                                   <MenuItem value={3}>
-                                        Nhiệm vụ 3
-                                   </MenuItem>
-                                   <MenuItem value={4}>
-                                        Nhiệm vụ 4
-                                   </MenuItem>
+
+                                   {datawork && datawork.length ? datawork.map(ele => {
+                                        return (
+                                             <MenuItem value={ele.id}>
+                                                  {ele.name}
+                                             </MenuItem>
+                                        )
+                                   }) : ''}
+
                               </Select>
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Tên công việc: *</Typography>
-                              <TextField defaultValue={'Thiết kế bao bì sản phẩm trà xanh không độ'} sx={{ flex: 2.5 }} size='small'></TextField>
+                              <TextField sx={{ flex: 2.5 }} size='small'></TextField>
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} >
                               <Typography flex={1}>Nội dung công việc: *</Typography>
@@ -158,22 +330,22 @@ function AssignJob() {
                          <Box width={'100%'} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Độ phức tạp: *</Typography>
                               <Select
-                                   value={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
                               >
                                    <MenuItem value={1}>
-                                        Kém
+                                        1
                                    </MenuItem>
                                    <MenuItem value={2}>
-                                        Thấp
+                                        2
                                    </MenuItem>
                                    <MenuItem value={3}>
-                                        Trung Bình
+                                        3
                                    </MenuItem>
                                    <MenuItem value={4}>
-                                        Khá
+                                        4
                                    </MenuItem>
                                    <MenuItem value={5}>
-                                        Tốt
+                                        5
                                    </MenuItem>
 
                               </Select>
@@ -182,16 +354,13 @@ function AssignJob() {
                               <Typography flex={1}>Mức độ công việc:
                               </Typography>
                               <Select
-                                   value={1} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={1} sx={{ flex: 2.5 }} size='small'
                               >
                                    <MenuItem value={1}>
                                         Thường
                                    </MenuItem>
                                    <MenuItem value={2}>
-                                        Trung Bình
-                                   </MenuItem>
-                                   <MenuItem value={3}>
-                                        Khó
+                                        Khẩn cấp
                                    </MenuItem>
                               </Select>
                          </Box>
@@ -208,13 +377,13 @@ function AssignJob() {
                          </Box>
 
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.8}>Văn bản liên quan</Typography>
+                              <Typography flex={0.56}>Văn bản liên quan</Typography>
                               <label htmlFor='form' className='cssLabel'>+ Chọn văn bản</label>
                               <Typography marginLeft={1} fontSize={12}>vanban_hanhchinh.docs, dung lượng 500kb</Typography>
                               <TextField type='file' sx={{ flex: 2.5 }} size='small' hidden id='form' />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.59}>File đính kèm:</Typography>
+                              <Typography flex={0.47}>File đính kèm:</Typography>
                               <label htmlFor='form' className='cssLabel2'>Tải tệp lên</label>
                               <Typography marginLeft={1} fontSize={12}>anh_minhhoa.png, dung lượng 300mb</Typography>
                               <TextField type='file' sx={{ flex: 2.5 }} size='small' hidden id='form' />
@@ -238,7 +407,7 @@ function AssignJob() {
                     <Box>
                          <TableContainer sx={{ marginTop: 2, marginBottom: 5 }}>
                               <Table size='small'>
-                                   <TableHead >
+                                   <TableHead>
                                         <TableRow>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} rowSpan={2}>STT</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'25%'} rowSpan={2}>Phòng ban</StyledTableCell>
@@ -258,20 +427,49 @@ function AssignJob() {
                                         </TableRow>
                                    </TableHead>
                                    <TableBody>
-                                        {data && data.length > 0 ? data.map(ele => {
+                                        {data && data.length > 0 ? data.map((ele, index) => {
                                              return (
-                                                  <TableRow>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.id}</StyledTableCell>
-                                                       <StyledTableCell sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.name}</StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}><Checkbox /></StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.xulychinh.canhan}</StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}><Checkbox /></StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}> {ele.phoihop.canhan}</StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}><Checkbox /></StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.theodoi.canhan} </StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.ngaybatdau}</StyledTableCell>
-                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>{ele.ngayhethan}</StyledTableCell>
-                                                  </TableRow>
+                                                  <>
+                                                       <TableRow >
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2', borderLeft: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.id}</StyledTableCell>
+                                                            <StyledTableCell sx={{ borderRight: '1px solid #f2f2f2', cursor: 'pointer' }} width={'8.9%'} onClick={(e) => { openCollapse(e, ele) }}>
+                                                                 <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
+                                                                      <Typography variant='p' >{ele.name}</Typography>
+                                                                      {ele.open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
+                                                                 </Box>
+                                                            </StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngaybatdau}</StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngayhethan}</StyledTableCell>
+                                                       </TableRow>
+                                                       {ele.staff && ele.staff.length > 0 ? ele.staff.map((element, index2) => {
+                                                            return (
+                                                                 <TableRow sx={!ele.open ? { display: 'none' } : ""}>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2', borderLeft: '1px solid #f2f2f2' }} width={'8.9%'}>
+                                                                           {(index + 1) + "." + (index2 + 1)}
+                                                                      </StyledTableCell>
+                                                                      <StyledTableCell sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>
+                                                                           {element.name}
+                                                                      </StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> <Checkbox /></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> <Checkbox /></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngaybatdau}</StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngayhethan}</StyledTableCell>
+                                                                 </TableRow>
+                                                            )
+                                                       }) : ""}
+
+
+                                                  </>
                                              )
                                         }) : ""}
 
@@ -280,7 +478,7 @@ function AssignJob() {
                          </TableContainer>
                     </Box>
                     <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                         <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65' }}>Lưu thay đổi và tạo công việc</Button>
+                         <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65' }}>Lưu phân công</Button>
                          <Button size={'small'} variant='outlined' sx={{ marginLeft: 2 }}>Hủy</Button>
                     </Box>
 

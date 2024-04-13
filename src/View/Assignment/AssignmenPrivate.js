@@ -9,7 +9,56 @@ function AssignmentPrivate() {
           setSelectedIndex(index);
      };
 
-
+     const [listMission, setListMission] = React.useState([
+          {
+               id: 1,
+               name: 'Soạn thảo nghị quyết',
+               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
+               leader: true,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 2,
+               name: 'Soạn thảo công văn trình lãnh đạo',
+               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
+               leader: true,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 3,
+               name: 'Tham dự tập huấn cán bộ',
+               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
+               leader: true,
+               specialize: false,
+               support: false,
+          },
+          {
+               id: 4,
+               name: 'Chủ trì dự thảo tập huấn',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 5,
+               name: 'Họp chi bộ',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 6,
+               name: 'Tham gia học nghị quyết',
+               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+     ])
      return (
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
                <Box>
@@ -18,7 +67,7 @@ function AssignmentPrivate() {
                </Box>
                <Box width={'100%'} padding={3} display={'flex'} >
 
-                    <Box width={520} height={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} >
+                    <Box width={'49%'} minHeight={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} >
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -28,7 +77,7 @@ function AssignmentPrivate() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35 }}>
+                                   <ListItem sx={{ backgroundColor: '#e8e7e6', borderBottom: '1px solid gray', height: 35 }}>
                                         <ListItemIcon>
                                              Tên cá nhân
                                         </ListItemIcon>
@@ -39,7 +88,7 @@ function AssignmentPrivate() {
                                         onClick={(event) => handleListItemClick(event, 0)}
                                    >
                                         <ListItemIcon>
-                                             Bùi Việt Anh
+                                             Lê Ngọc Trong
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
@@ -48,7 +97,7 @@ function AssignmentPrivate() {
                                         onClick={(event) => handleListItemClick(event, 1)}
                                    >
                                         <ListItemIcon>
-                                             Văn Nguyễn Duy Tân
+                                             Vũ Ngọc Dũng
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
@@ -57,21 +106,39 @@ function AssignmentPrivate() {
                                         onClick={(event) => handleListItemClick(event, 2)}
                                    >
                                         <ListItemIcon>
-                                             Nguyễn Danh Hưng
+                                             Nguyễn Thị Thanh Huyền
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
+                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
                                         selected={selectedIndex === 3}
                                         onClick={(event) => handleListItemClick(event, 3)}
                                    >
                                         <ListItemIcon>
-                                             Nguyễn Trần Thanh Điền
+                                             Đào Thị Ngọc Yến
+                                        </ListItemIcon>
+                                   </ListItemButton>
+                                   <ListItemButton
+                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        selected={selectedIndex === 4}
+                                        onClick={(event) => handleListItemClick(event, 4)}
+                                   >
+                                        <ListItemIcon>
+                                             Lưu Trọng Giáp
+                                        </ListItemIcon>
+                                   </ListItemButton>
+                                   <ListItemButton
+                                        selected={selectedIndex === 5}
+                                        onClick={(event) => handleListItemClick(event, 5)}
+                                   >
+                                        <ListItemIcon>
+                                             Trần Thùy Dương
                                         </ListItemIcon>
                                    </ListItemButton>
 
                               </List>
                          </Box>
-                         <Box width={'100%'} height={'130px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
+                         <Box width={'100%'} height={'60px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
 
                               <Box display={'flex'} alignItems={'center'} >
                                    <Typography>
@@ -100,7 +167,7 @@ function AssignmentPrivate() {
 
                          </Box>
                     </Box>
-                    <Box width={520} height={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} marginLeft={3}>
+                    <Box width={'49%'} minHeight={400} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} marginLeft={3}>
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -109,8 +176,8 @@ function AssignmentPrivate() {
                               <Button sx={{ marginLeft: 1 }} variant='outlined' >Tìm kiếm</Button>
                          </Box>
                          <Box>
-                              <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray' }}>
-                                   <ListItem sx={{ fontSize: 15, backgroundColor: 'white', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                              <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
+                                   <ListItem sx={{ backgroundColor: '#e8e7e6', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
                                         <ListItemIcon>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>
@@ -118,42 +185,22 @@ function AssignmentPrivate() {
                                              Chọn
                                         </ListItemIcon>
                                    </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 1
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 2
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 3
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
-                                   <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, display: 'flex', justifyContent: 'space-between' }}>
-                                        <ListItemIcon>
-                                             Nhiệm vụ 4
-                                        </ListItemIcon>
-                                        <ListItemIcon>
-                                             <Checkbox size={'small'}></Checkbox>
-                                        </ListItemIcon>
-                                   </ListItem>
+                                   {listMission && listMission.length > 0 ? listMission.map(ele => {
+                                        return (
+                                             <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                                                  <ListItemIcon>
+                                                       {ele.name}
+                                                  </ListItemIcon>
+                                                  <ListItemIcon>
+                                                       <Checkbox size={'small'}></Checkbox>
+                                                  </ListItemIcon>
+                                             </ListItem>
+                                        )
+                                   }) : ""}
 
                               </List>
                          </Box>
-                         <Box width={'100%'} height={'130px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
+                         <Box width={'100%'} height={'60px'} display={'flex'} alignItems={'flex-end'} justifyContent={'flex-end'} >
 
                               <Box display={'flex'} alignItems={'center'} >
                                    <Typography>
@@ -185,7 +232,7 @@ function AssignmentPrivate() {
 
                </Box>
 
-          </Box>
+          </Box >
      )
 }
 

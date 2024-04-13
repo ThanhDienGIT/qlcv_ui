@@ -16,6 +16,63 @@ function DiaLogWork() {
      const handleClose = () => {
           setOpen(false);
      };
+
+
+     const [data, setData] = React.useState([
+          {
+               id: 1,
+               name: 'Soạn thảo nghị quyết',
+               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
+               leader: true,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 2,
+               name: 'Soạn thảo công văn trình lãnh đạo',
+               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
+               leader: true,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 3,
+               name: 'Tham dự tập huấn cán bộ',
+               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
+               leader: true,
+               specialize: false,
+               support: false,
+          },
+          {
+               id: 4,
+               name: 'Chủ trì dự thảo tập huấn',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: false,
+          },
+          {
+               id: 5,
+               name: 'Họp chi bộ',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 6,
+               name: 'Tham gia học nghị quyết',
+               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+     ])
+
+
+
+
+
      return (
           <React.Fragment>
                <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }} onClick={handleClickOpen}>
@@ -40,21 +97,17 @@ function DiaLogWork() {
                                              Nhiệm vụ: *
                                         </Typography>
                                         <Select
-                                             value={2}
+                                             defaultValue={2}
                                              size={'small'} sx={{ flex: 3 }}
                                         >
-                                             <MenuItem value={1}>
-                                                  Nhiệm vụ 1
-                                             </MenuItem>
-                                             <MenuItem value={2}>
-                                                  Nhiệm vụ 2
-                                             </MenuItem>
-                                             <MenuItem value={3}>
-                                                  Nhiệm vụ 3
-                                             </MenuItem>
-                                             <MenuItem value={4}>
-                                                  Nhiệm vụ 4
-                                             </MenuItem>
+                                             {data && data.length > 0 ? data.map(ele => {
+                                                  return (
+                                                       <MenuItem value={ele.id}>
+                                                            {ele.name}
+                                                       </MenuItem>
+                                                  )
+                                             }) : ""}
+
                                         </Select>
 
                                    </Box>
@@ -62,14 +115,14 @@ function DiaLogWork() {
                                         <Typography flex={1}>
                                              Tên công việc: *
                                         </Typography>
-                                        <TextField size={'small'} defaultValue={'Công việc 1'} sx={{ flex: 3 }} />
+                                        <TextField size={'small'} placeholder='Nhập tên công việc' sx={{ flex: 3 }} />
                                    </Box>
                                    <Box display={'flex'} alignItems={'center'} marginTop={2}>
                                         <Typography flex={1}>
                                              Người thẩm định: *
                                         </Typography>
                                         <Select
-                                             value={2}
+                                             defaultValue={2}
                                              size={'small'} sx={{ flex: 3 }}
                                         >
                                              <MenuItem value={1}>
@@ -90,7 +143,7 @@ function DiaLogWork() {
                                         <Typography flex={1}>
                                              Nội dung công việc: *
                                         </Typography>
-                                        <TextField size={'small'} defaultValue={'Nội dung công việc'} multiline rows={2} sx={{ flex: 3 }} />
+                                        <TextField size={'small'} placeholder={'Nội dung công việc'} multiline rows={2} sx={{ flex: 3 }} />
                                    </Box>
                               </Box>
                          </DialogContentText>

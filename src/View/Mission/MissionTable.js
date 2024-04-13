@@ -37,35 +37,51 @@ function MissionTable(props) {
      const [data, setData] = React.useState([
           {
                id: 1,
-               name: 'Nhiệm vụ 1',
-               describe: 'Nhiệm vụ quan trọng cần hoàn thành trong tháng này này',
+               name: 'Soạn thảo nghị quyết',
+               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
                leader: true,
                specialize: true,
                support: false,
           },
           {
                id: 2,
-               name: 'Nhiệm vụ 2',
-               describe: 'Nhiệm vụ quan trọng cần hoàn thành liền',
+               name: 'Soạn thảo công văn trình lãnh đạo',
+               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
                leader: true,
                specialize: true,
                support: true,
           },
           {
                id: 3,
-               name: 'Nhiệm vụ 3',
-               describe: 'Nhiệm vụ quan trọng này có giám sát',
+               name: 'Tham dự tập huấn cán bộ',
+               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
                leader: true,
                specialize: false,
                support: false,
           },
           {
                id: 4,
-               name: 'Nhiệm vụ 4',
-               describe: 'Nhiệm vụ quan trọng cần chuyên môn cao',
+               name: 'Chủ trì dự thảo tập huấn',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
                leader: false,
                specialize: true,
                support: false,
+          },
+          {
+               id: 5,
+               name: 'Họp chi bộ',
+               describe: 'Chuẩn bị và điều phối cuộc họp',
+               leader: false,
+               specialize: true,
+               support: true,
+          },
+          {
+               id: 6,
+               name: 'Tham gia học nghị quyết',
+               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
+               leader: false,
+               specialize: true,
+               support: true,
           },
      ])
 
@@ -105,7 +121,7 @@ function MissionTable(props) {
                                    return (
                                         <TableRow>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.id}</StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
+                                             <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
                                              <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.describe}</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                   <Checkbox checked={ele.leader} onChange={(e) => { onchange(e, ele) }} name='leader' />
@@ -130,7 +146,7 @@ function MissionTable(props) {
                     <Box width={'100%'} marginTop={2} display={'flex'} alignItems={'center'}
                     >
                          <Typography fontSize={12} color="gray">Tổng cộng : {data.length} nhiệm vụ</Typography>
-                         <Select size='small' value={5} sx={{ marginLeft: 2, fontSize: 10 }}>
+                         <Select size='small' value={10} sx={{ marginLeft: 2, fontSize: 10 }}>
                               <MenuItem value={5}>5</MenuItem>
                               <MenuItem value={10}>10</MenuItem>
                               <MenuItem value={15}>15</MenuItem>
