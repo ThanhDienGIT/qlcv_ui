@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Collapse, Divider, InputAdornment, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Box, Collapse, Divider, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import SettingsIcon from '@mui/icons-material/Settings';
 import '../../CSS/AssignJob.css'
@@ -12,6 +12,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Input from '@mui/joy/Input';
+import Textarea from '@mui/joy/Textarea';
+import Button from '@mui/joy/Button';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import Checkbox from '@mui/joy/Checkbox';
 function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -280,32 +286,31 @@ function AssignJob() {
                     <Box width={'49%'} display={'flex'} flexDirection={'column'}>
                          <Box width={'100%'} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Lãnh đạo giao việc: *</Typography>
-
                               <Select
-                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.4 }} size='sm'
                               >
-                                   <MenuItem value={1}>
+                                   <Option value={1}>
                                         Trương Văn Xuân
-                                   </MenuItem>
-                                   <MenuItem value={2}>
+                                   </Option>
+                                   <Option value={2}>
                                         Lê Hùng Ngọc
-                                   </MenuItem>
-                                   <MenuItem value={3}>
+                                   </Option>
+                                   <Option value={3}>
                                         Nguyễn Trịnh Công
-                                   </MenuItem>
+                                   </Option>
                               </Select>
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Nhiệm vụ: *</Typography>
                               <Select
-                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.4 }} size='sm'
                               >
 
                                    {datawork && datawork.length ? datawork.map(ele => {
                                         return (
-                                             <MenuItem value={ele.id}>
+                                             <Option value={ele.id}>
                                                   {ele.name}
-                                             </MenuItem>
+                                             </Option>
                                         )
                                    }) : ''}
 
@@ -313,16 +318,16 @@ function AssignJob() {
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Tên công việc: *</Typography>
-                              <TextField sx={{ flex: 2.5 }} size='small'></TextField>
+                              <Input sx={{ flex: 2.4 }} size='sm' />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} >
                               <Typography flex={1}>Nội dung công việc: *</Typography>
-                              <TextField sx={{ flex: 2.5 }} multiline rows={2} size='small'></TextField>
+                              <Textarea sx={{ flex: 2.44 }} size='sm' minRows={2} />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography >Nhắc việc cho người giao việc</Typography>
-                              <Checkbox></Checkbox>
-                              <Button size={'small'} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
+                              <Checkbox sx={{ marginLeft: 1, marginRight: 1 }}></Checkbox>
+                              <Button size={'sm'} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
                          </Box>
                     </Box>
                     <Box width={'49%'} >
@@ -330,23 +335,23 @@ function AssignJob() {
                          <Box width={'100%'} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Độ phức tạp: *</Typography>
                               <Select
-                                   defaultValue={3} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={3} sx={{ flex: 2.5 }} size='sm'
                               >
-                                   <MenuItem value={1}>
+                                   <Option value={1}>
                                         1
-                                   </MenuItem>
-                                   <MenuItem value={2}>
+                                   </Option>
+                                   <Option value={2}>
                                         2
-                                   </MenuItem>
-                                   <MenuItem value={3}>
+                                   </Option>
+                                   <Option value={3}>
                                         3
-                                   </MenuItem>
-                                   <MenuItem value={4}>
+                                   </Option>
+                                   <Option value={4}>
                                         4
-                                   </MenuItem>
-                                   <MenuItem value={5}>
+                                   </Option>
+                                   <Option value={5}>
                                         5
-                                   </MenuItem>
+                                   </Option>
 
                               </Select>
                          </Box>
@@ -354,39 +359,39 @@ function AssignJob() {
                               <Typography flex={1}>Mức độ công việc:
                               </Typography>
                               <Select
-                                   defaultValue={1} sx={{ flex: 2.5 }} size='small'
+                                   defaultValue={1} sx={{ flex: 2.5 }} size='sm'
                               >
-                                   <MenuItem value={1}>
+                                   <Option value={1}>
                                         Thường
-                                   </MenuItem>
-                                   <MenuItem value={2}>
+                                   </Option>
+                                   <Option value={2}>
                                         Khẩn cấp
-                                   </MenuItem>
+                                   </Option>
                               </Select>
                          </Box>
                          <Box width={'100%'} display={'flex'}>
                               <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                                   <Typography flex={0.57}>Số ngày thực hiện: *</Typography>
-                                   <TextField sx={{ flex: 0.3 }} type='number' defaultValue={14} size='small'></TextField>
+                                   <Typography flex={0.59}>Số ngày thực hiện: *</Typography>
+                                   <Input sx={{ flex: 0.3 }} type='number' defaultValue={14} size='sm' />
                               </Box>
                               <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
                                    <Typography flex={1}>Ngày hết hạn: *</Typography>
-                                   <TextField sx={{ flex: 1 }} type='date' size='small'></TextField>
+                                   <Input sx={{ flex: 1 }} type='date' size='sm' />
                               </Box>
 
                          </Box>
 
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.56}>Văn bản liên quan</Typography>
-                              <label htmlFor='form' className='cssLabel'>+ Chọn văn bản</label>
+                              <Typography flex={0.59}>Văn bản liên quan</Typography>
+                              <label htmlFor='form' className='cssLabel' >+ Chọn văn bản</label>
                               <Typography marginLeft={1} fontSize={12}>vanban_hanhchinh.docs, dung lượng 500kb</Typography>
-                              <TextField type='file' sx={{ flex: 2.5 }} size='small' hidden id='form' />
+                              <TextField type='file' size='sm' hidden id='form' />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.47}>File đính kèm:</Typography>
+                              <Typography flex={0.59}>File đính kèm:</Typography>
                               <label htmlFor='form' className='cssLabel2'>Tải tệp lên</label>
                               <Typography marginLeft={1} fontSize={12}>anh_minhhoa.png, dung lượng 300mb</Typography>
-                              <TextField type='file' sx={{ flex: 2.5 }} size='small' hidden id='form' />
+                              <TextField type='file' size='sm' hidden id='form' />
                          </Box>
 
                     </Box>
@@ -398,11 +403,10 @@ function AssignJob() {
                          <Divider sx={{ borderBottom: '1px solid gray' }} />
                     </Box>
                     <Box display={'flex'} alignItems={'center'} marginTop={2} width={400} >
-                         <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
-                              InputProps={{
-                                   startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
-                              }} />
-                         <Button sx={{ marginLeft: 1 }} variant='outlined' >Tìm kiếm</Button>
+                         <Input size={'sm'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
+                              startDecorator={<SearchIcon />}
+                         />
+                         <Button sx={{ marginLeft: 1 }} size='sm' variant='outlined' >Tìm kiếm</Button>
                     </Box>
                     <Box>
                          <TableContainer sx={{ marginTop: 2, marginBottom: 5 }}>
@@ -478,8 +482,8 @@ function AssignJob() {
                          </TableContainer>
                     </Box>
                     <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                         <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65' }}>Lưu phân công</Button>
-                         <Button size={'small'} variant='outlined' sx={{ marginLeft: 2 }}>Hủy</Button>
+                         <Button size={'sm'} variant='contained' sx={{ backgroundColor: '#052c65', color: 'white' }}>Lưu phân công</Button>
+                         <Button size={'sm'} variant='outlined' sx={{ marginLeft: 2 }}>Hủy</Button>
                     </Box>
 
 

@@ -1,7 +1,5 @@
-import { Box, Button, Divider, MenuItem, Select, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { Box, Button, Checkbox, Divider, MenuItem, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +9,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DiaLogWork from './DiaLogWork';
 import DiaLogAddWork from './DiaLogAddWork';
+import Input from '@mui/joy/Input';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import Textarea from '@mui/joy/Textarea';
+import { TimePicker } from '@mui/x-date-pickers';
+import { TimeField } from '@mui/x-date-pickers/TimeField';
+import dayjs from 'dayjs';
+import Tabs from '@mui/joy/Tabs';
+import TabList from '@mui/joy/TabList';
+import Tab from '@mui/joy/Tab';
+
 function LogWork() {
      const [value, setValue] = React.useState('1');
 
@@ -42,10 +51,11 @@ function LogWork() {
      const [dataRender, setDataRender] = useState([
           {
                id: 1,
-               name: 'Công việc 1',
-               content: 'Nội dung công việc 1',
-               start: '07:30',
-               end: '11:30',
+               select: false,
+               name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
+               content: 'Tham gia dự thảo',
+               start: '2022-04-17T07:30',
+               end: '2022-04-17T11:30',
                startnumber: 730,
                endnumber: 1130,
                tiendo: 10,
@@ -54,25 +64,27 @@ function LogWork() {
           },
           {
                id: 2,
-               name: 'Công việc 2',
-               content: 'Nội dung công việc 2',
-               start: '13:20',
-               end: '14:30',
+               select: false,
+               name: 'Chuẩn bị tài liệu phục vụ cuộc họp Thường trực tuần 14/2024',
+               content: 'Chỉnh sửa và in tài liệu phục vụ cuộc họp Thường trực tuần 14/2024',
+               start: '2022-04-17T13:20',
+               end: '2022-04-17T14:30',
                startnumber: 1320,
                endnumber: 1430,
-               tiendo: 5,
+               tiendo: 40,
                ketqua: '',
                nhanxet: '',
           },
           {
                id: 3,
-               name: 'Công việc 3',
-               content: 'Nội dung công việc 3',
-               start: '16:30',
-               end: '17:30',
+               select: false,
+               name: 'Họp Chi bộ tháng 04/2024 (Ngày 01/04/2024)',
+               content: 'Họp Chi bộ tháng ',
+               start: '2022-04-17T16:30',
+               end: '2022-04-17T17:30',
                startnumber: 1630,
                endnumber: 1730,
-               tiendo: 8,
+               tiendo: 30,
                ketqua: '',
                nhanxet: ''
           },
@@ -118,6 +130,51 @@ function LogWork() {
      ])
 
 
+     useEffect(() => {
+          if (Number(value) === 1) {
+               setDataRender([
+                    {
+                         id: 1,
+                         name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
+                         content: 'Ghi chú lại những góp ý trong cuộc họp',
+                         start: `${dayjs().format('YYYY-MM-DD')}T07:30`,
+                         end: `${dayjs().format('YYYY-MM-DD')}T11:30`,
+                         startnumber: 730,
+                         endnumber: 1130,
+                         tiendo: 10,
+                         ketqua: 'Đã hoàn thành',
+                         nhanxet: 'Không có'
+                    },
+                    {
+                         id: 2,
+                         name: 'Chuẩn bị tài liệu phục vụ cuộc họp Thường trực tuần 14/2024',
+                         content: 'Chỉnh sửa tài liệu',
+                         start: `${dayjs().format('YYYY-MM-DD')}T13:20`,
+                         end: `${dayjs().format('YYYY-MM-DD')}T14:30`,
+                         startnumber: 1320,
+                         endnumber: 1430,
+                         tiendo: 5,
+                         ketqua: '',
+                         nhanxet: '',
+                    },
+                    {
+                         id: 3,
+                         name: 'Họp Chi bộ tháng 04/2024 (Ngày 01/04/2024)',
+                         content: 'Tham gia họp',
+                         start: `${dayjs().format('YYYY-MM-DD')}T16:30`,
+                         end: `${dayjs().format('YYYY-MM-DD')}T17:30`,
+                         startnumber: 1630,
+                         endnumber: 1730,
+                         tiendo: 8,
+                         ketqua: '',
+                         nhanxet: ''
+                    },
+               ])
+          } else {
+               setDataRender([])
+          }
+     }, [value])
+
      const handleAddLogWork = (value) => {
           console.log(value)
           const object = {
@@ -135,7 +192,73 @@ function LogWork() {
           setDataRender(rev => ([...rev, object]))
      }
 
+     const [selectAll, setSelectAll] = useState(false)
 
+
+     const handleSelectAll = () => {
+
+          if (Number(value) === 1) {
+               const arr = [...data]
+               setSelectAll(!selectAll)
+               arr.map(ele => {
+                    ele.select = !selectAll
+               })
+               setDataRender(arr);
+          } else {
+               const arr = [...dataRender]
+               setSelectAll(!selectAll)
+               arr.map(ele => {
+                    ele.select = !selectAll
+               })
+               setDataRender(arr);
+          }
+
+     }
+
+     const handleSelectsingle = (e, ele) => {
+
+          if (Number(value) === 1) {
+               const arr = [...data]
+               arr.map(element => {
+                    if (ele.id === element.id) {
+                         element.select = !element.select
+                    }
+               })
+               if (arr.some(x => x.select === false)) {
+                    setSelectAll(false)
+               } else {
+                    setSelectAll(true)
+               }
+
+               setDataRender(arr);
+          } else {
+               const arr = [...dataRender]
+               arr.map(element => {
+                    if (ele.id === element.id) {
+                         element.select = !element.select
+                    }
+               })
+               if (arr.some(x => x.select === false)) {
+                    setSelectAll(false)
+               } else {
+                    setSelectAll(true)
+               }
+
+               setDataRender(arr);
+          }
+
+     }
+
+
+     const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'))
+
+     const today = () => {
+          setDate(dayjs().format('DD/MM/YYYY'))
+     }
+
+     const yesterday = () => {
+          setDate(dayjs().subtract(1, 'day').format('DD/MM/YYYY'))
+     }
 
      return (
           <Box width={'100%'} padding={2} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
@@ -146,29 +269,33 @@ function LogWork() {
                     </Box>
                </Box>
                <Box>
+
                     <Tabs
                          value={value}
                          onChange={handleChange}
-                         aria-label="wrapped label tabs example"
-                         sx={{ width: 392, border: '1px solid black', borderRadius: 1, marginTop: 1 }}
-                    >
-                         <Tab value="1" label="Công việc được giao" />
-                         <Tab value="2" label="Công việc cá nhân" sx={{ borderLeft: '1px solid black' }} />
+                         aria-label="Disabled tabs" defaultValue={0}>
+                         <TabList>
+                              <Tab value="1" label="Công việc được giao">Công việc được giao</Tab>
+                              <Tab value="2" label="Công việc cá nhân" >Công việc cá nhân</Tab>
+                         </TabList>
                     </Tabs>
+
+
+
                     <Divider sx={{ borderBottom: '1px solid gray', marginTop: 2 }} />
                </Box>
 
                {value === '1' ?
                     <Box marginTop={2} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
                          <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
-                              <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
-                                   Báo cáo cho hôm qua
+                              <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }} onClick={yesterday}>
+                                   Hôm qua
                               </Button>
-                              <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
-                                   Báo cáo cho hôm nay
+                              <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }} onClick={today}>
+                                   Hôm nay
                               </Button>
-                              <Typography>Chọn ngày báo cáo: </Typography>
-                              <TextField type='date' size={'small'} sx={{ marginLeft: 2 }} />
+                              <Typography>Chọn ngày: </Typography>
+                              <TextField type='date' onChange={(e) => { setDate(dayjs(e.target.value).format('DD/MM/YYYY')) }} size={'small'} sx={{ marginLeft: 2 }} />
                          </Box>
                          <Box>
                               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65' }} >
@@ -181,12 +308,12 @@ function LogWork() {
                     <Box marginTop={2} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
                          <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
                               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
-                                   Báo cáo cho hôm qua
+                                   hôm qua
                               </Button>
                               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
-                                   Báo cáo cho hôm nay
+                                   hôm nay
                               </Button>
-                              <Typography>Chọn ngày báo cáo: </Typography>
+                              <Typography>Chọn ngày: </Typography>
                               <TextField type='date' size={'small'} sx={{ marginLeft: 2 }} />
                          </Box>
                          <Box>
@@ -202,91 +329,71 @@ function LogWork() {
 
                <Divider sx={{ borderBottom: '1px solid gray', marginTop: 2 }} />
                <Box>
-                    <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Báo cáo hôm nay: 13/04/2024</Typography>
-                    <Table size='small'>
+                    <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Báo cáo hôm nay: {date ? date : ""}</Typography>
+                    <Table size='small' sx={{ marginTop: 1 }}>
                          <TableHead >
                               <TableRow >
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>STT</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'12%'}>Tên công việc</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'15%'}>Nội dung thực hiện</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'}>bắt đầu</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'}>kết thúc</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'}>Tổng giờ</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Tiến độ</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'10%'}>Kết quả</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'20%'}>Nhận xét</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'18%'}>Tên công việc</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'}>Nội dung thực hiện</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'22%'} colSpan={2}>Thời gian</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} >Tổng giờ</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }}>Tiến độ</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'30%'}>Kết quả</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'5%'}><Checkbox sx={{ marginTop: 1 }} checked={selectAll} onChange={handleSelectAll} /></StyledTableCell>
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {dataRender && dataRender.length > 0 ? dataRender.map(ele => {
-                                   return (
-                                        <TableRow>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }}>{ele.id}</StyledTableCell>
-                                             <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} width={'12%'}>{ele.name}</StyledTableCell>
-                                             <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} width={'8%'}> <TextField size={'small'} defaultValue={ele.content} fullWidth /></StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} width={'8%'}>
-                                                  <TextField fullWidth size='small' value={ele.start} type={'time'} />
-                                             </StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} width={'8%'}>
-                                                  <TextField size='small' value={ele.end} type={'time'} />
-                                             </StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} width={'8%'}>
-                                                  <TextField size='small' type='number' value={Number(ele.endnumber) !== 0 ? Number((ele.endnumber - ele.startnumber)) / 100 : 0} sx={{ width: '70px' }} />
-                                             </StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }} width={'8%'}>
-                                                  <Select value={ele.tiendo} sx={{ width: '90px' }} size='small' >
-                                                       <MenuItem value={1}>
-                                                            10%
-                                                       </MenuItem>
-                                                       <MenuItem value={2}>
-                                                            20%
-                                                       </MenuItem>
-                                                       <MenuItem value={3}>
-                                                            30%
-                                                       </MenuItem>
-                                                       <MenuItem value={4}>
-                                                            40%
-                                                       </MenuItem>
-                                                       <MenuItem value={5}>
-                                                            50%
-                                                       </MenuItem>
-                                                       <MenuItem value={6}>
-                                                            60%
-                                                       </MenuItem>
-                                                       <MenuItem value={7}>
-                                                            70%
-                                                       </MenuItem>
-                                                       <MenuItem value={8}>
-                                                            80%
-                                                       </MenuItem>
-                                                       <MenuItem value={9}>
-                                                            90%
-                                                       </MenuItem>
-                                                       <MenuItem value={10}>
-                                                            100%
-                                                       </MenuItem>
-                                                  </Select>
-                                             </StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }} width={'20%'}>
-                                                  <Box display={'flex'} flexDirection={'column'}>
-                                                       <TextField size={'small'} placeholder='Nhập kết quả' multiline />
-                                                       <Box display={'flex'} marginTop={1}>
-                                                            <label htmlFor='form' className='cssLabel3'>+ Chọn văn bản</label>
-                                                            <TextField type='file' size='small' hidden id='form' />
-                                                            <label htmlFor='form' className='cssLabel4'>Tải tệp lên</label>
-                                                            <TextField type='file' size='small' hidden id='form' />
+
+                              {dataRender && dataRender.length > 0 ?
+
+                                   dataRender.map(ele => {
+                                        return (
+                                             <TableRow>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }}>{ele.id}</StyledTableCell>
+                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
+                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                       <Textarea size={'sm'} defaultValue={ele.content} minRows={4} />
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                       <TimeField defaultValue={dayjs(ele.start)} ampm={false} size='small' sx={{ minWidth: 69 }} />
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                       <TimeField defaultValue={dayjs(ele.end)} ampm={false} size='small' sx={{ minWidth: 69 }} />
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                       <Input size='sm' type='number' defaultValue={Number(ele.endnumber) !== 0 ? Number((ele.endnumber - ele.startnumber)) / 100 : 0} sx={{ width: '65px' }} />
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }} >
+                                                       <Select defaultValue={ele.tiendo} size='sm' >
+                                                            <Option value={10}>10%</Option>
+                                                            <Option value={20}>20%</Option>
+                                                            <Option value={30}>30%</Option>
+                                                            <Option value={40}>40%</Option>
+                                                            <Option value={50}>50%</Option>
+                                                            <Option value={60}>60%</Option>
+                                                            <Option value={70}>70%</Option>
+                                                            <Option value={80}>80%</Option>
+                                                            <Option value={90}>90%</Option>
+                                                            <Option value={100}>100%</Option>
+                                                       </Select>
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }}>
+                                                       <Box display={'flex'} flexDirection={'column'}>
+                                                            <Textarea size={'sm'} placeholder='Nhập kết quả' minRows={3} />
+                                                            <Box display={'flex'} marginTop={1}>
+                                                                 <label htmlFor='form' className='cssLabel3'>+ Chọn văn bản</label>
+                                                                 <TextField type='file' size='small' hidden id='form' />
+                                                                 <label htmlFor='form' className='cssLabel4'>Tải tệp lên</label>
+                                                                 <TextField type='file' size='small' hidden id='form' />
+                                                            </Box>
                                                        </Box>
+                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ border: '1px solid #f0f0f0' }} width={'5%'}><Checkbox checked={ele.select} onChange={(e) => { handleSelectsingle(e, ele) }} /></StyledTableCell>
+                                             </TableRow>
+                                        )
 
-                                                  </Box>
-
-                                             </StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'20%'}>
-                                                  <TextField fullWidth placeholder='Nhận xét' sx={{ flex: 0.2 }} size='small' multiline rows={2.5} />
-                                             </StyledTableCell>
-                                        </TableRow>
-                                   )
-
-                              }) : ""}
+                                   }) : ""}
                          </TableBody>
                     </Table>
                </Box>

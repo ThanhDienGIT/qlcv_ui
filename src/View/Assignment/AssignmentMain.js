@@ -98,7 +98,7 @@ function AssignmentMain() {
                </Box>
                <Box width={'100%'} padding={3} display={'flex'} >
 
-                    <Box width={'49%'} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} >
+                    <Box width={'49%'} backgroundColor={'#f7f7f7'} borderRadius={1} padding={2} >
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -108,8 +108,8 @@ function AssignmentMain() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35, backgroundColor: '#e3e3e3' }}>
-                                        <ListItemIcon>
+                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35, backgroundColor: '#052c65', color: 'white' }}>
+                                        <ListItemIcon sx={{ color: 'white' }}>
                                              Tên phòng ban
                                         </ListItemIcon>
                                    </ListItem>
@@ -160,7 +160,7 @@ function AssignmentMain() {
 
                          </Box>
                     </Box>
-                    <Box width={'49%'} backgroundColor={'#f5f5f5'} borderRadius={1} padding={2} marginLeft={3}>
+                    <Box width={'49%'} backgroundColor={'#f7f7f7'} borderRadius={1} padding={2} marginLeft={3}>
                          <Box display={'flex'} alignItems={'center'}>
                               <TextField size={'small'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                                    InputProps={{
@@ -170,11 +170,11 @@ function AssignmentMain() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
-                                   <ListItem sx={{ fontSize: 15, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', backgroundColor: '#e3e3e3' }}>
-                                        <ListItemIcon>
+                                   <ListItem sx={{ fontSize: 15, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', backgroundColor: '#052c65', }}>
+                                        <ListItemIcon sx={{ color: 'white' }}>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>
-                                        <ListItemIcon>
+                                        <ListItemIcon sx={{ color: 'white' }}>
                                              Chọn
                                         </ListItemIcon>
                                    </ListItem>

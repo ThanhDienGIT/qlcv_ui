@@ -1,18 +1,17 @@
-.contained-sidebar{
-     height: 130vh;
+.contained-sidebar {
+     min-height: 150vh;
      background-color: var(--sidebarcolor);
      border: 1px solid rgb(156, 156, 156);
      width: 15%;
-     min-width: 270px;
- 
+     min-width: 220px;
 }
 
-.link{
+.link {
      text-decoration: none;
      color: rgb(0, 0, 0)
 }
 
-.delete-padding{
+.delete-padding {
      padding: 0px;
      padding-top: 0px;
      padding-bottom: 0px;
