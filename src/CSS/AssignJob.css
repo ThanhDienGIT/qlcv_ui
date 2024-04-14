@@ -38,3 +38,17 @@
      justify-content: center;
      margin-left: 8px;
 }
+
+.cssButton {
+     border: 1px solid black;
+     padding: 8px;
+}
+
+.cssButton2 {
+     background-color: #052c65;
+     padding: 6px;
+     padding-left: 12px;
+     padding-right: 12px;
+     color: white;
+     margin-left: 5px
+}

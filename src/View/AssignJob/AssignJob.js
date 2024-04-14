@@ -1,4 +1,4 @@
-import { Box, Collapse, Divider, InputAdornment, TextField, Typography } from '@mui/material'
+import { Box, Collapse, Divider, InputAdornment, Radio, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import SettingsIcon from '@mui/icons-material/Settings';
 import '../../CSS/AssignJob.css'
@@ -17,6 +17,7 @@ import Textarea from '@mui/joy/Textarea';
 import Button from '@mui/joy/Button';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
+import dayjs from 'dayjs'
 import Checkbox from '@mui/joy/Checkbox';
 function AssignJob() {
 
@@ -272,8 +273,88 @@ function AssignJob() {
           setData(arrFilter)
      }
 
+     const [defaultDate, setDefaultDate] = useState(dayjs().add(7, 'day').format('YYYY-MM-DD'))
+
+     const [formNhacViec, setFormNhacViec] = useState(false)
 
 
+     const [listHours, setListHours] = useState([
+          { id: 1, name: '8h' },
+          { id: 1, name: '9h' },
+          { id: 1, name: '10h' },
+          { id: 1, name: '11h' },
+          { id: 1, name: '12h' },
+          { id: 1, name: '13h' },
+          { id: 1, name: '14h' },
+          { id: 1, name: '15h' },
+          { id: 1, name: '16h' },
+          { id: 1, name: '17h' },
+     ])
+
+
+     const [listday, setDay] = useState([
+          { id: 1, name: 'Thứ 2' },
+          { id: 1, name: 'Thứ 3' },
+          { id: 1, name: 'Thứ 4' },
+          { id: 1, name: 'Thứ 5' },
+          { id: 1, name: 'Thứ 6' },
+          { id: 1, name: 'Thứ 7' },
+          { id: 1, name: 'Chủ nhật' },
+     ])
+
+     const [listdayonMonth, setListdayonMonth] = useState([
+          { id: 1, name: '1' },
+          { id: 1, name: '2' },
+          { id: 1, name: '3' },
+          { id: 1, name: '4' },
+          { id: 1, name: '5' },
+          { id: 1, name: '6' },
+          { id: 1, name: '7' },
+          { id: 1, name: '8' },
+          { id: 1, name: '9' },
+          { id: 1, name: '10' },
+          { id: 1, name: '11' },
+          { id: 1, name: '12' },
+          { id: 1, name: '13' },
+          { id: 1, name: '14' },
+          { id: 1, name: '15' },
+          { id: 1, name: '16' },
+          { id: 1, name: '17' },
+          { id: 1, name: '18' },
+          { id: 1, name: '19' },
+          { id: 1, name: '20' },
+          { id: 1, name: '21' },
+          { id: 1, name: '22' },
+          { id: 1, name: '23' },
+          { id: 1, name: '24' },
+          { id: 1, name: '25' },
+          { id: 1, name: '26' },
+          { id: 1, name: '27' },
+          { id: 1, name: '28' },
+          { id: 1, name: '29' },
+          { id: 1, name: '30' },
+          { id: 1, name: '31' },
+
+     ])
+
+     const [listMonthonYear, setlistMonthonYear] = useState([
+          { id: 1, name: '1' },
+          { id: 1, name: '2' },
+          { id: 1, name: '3' },
+          { id: 1, name: '4' },
+          { id: 1, name: '5' },
+          { id: 1, name: '6' },
+          { id: 1, name: '7' },
+          { id: 1, name: '8' },
+          { id: 1, name: '9' },
+          { id: 1, name: '10' },
+          { id: 1, name: '11' },
+          { id: 1, name: '12' },
+     ])
+
+     const openCloseCollapse = () => {
+          setFormNhacViec(!formNhacViec)
+     }
 
      return (
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
@@ -325,13 +406,10 @@ function AssignJob() {
                               <Textarea sx={{ flex: 2.44 }} size='sm' minRows={2} />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography >Nhắc việc cho người giao việc</Typography>
-                              <Checkbox sx={{ marginLeft: 1, marginRight: 1 }}></Checkbox>
-                              <Button size={'sm'} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
+                              <Button size={'sm'} onClick={openCloseCollapse} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
                          </Box>
                     </Box>
-                    <Box width={'49%'} >
-
+                    <Box width={'49%'}>
                          <Box width={'100%'} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Độ phức tạp: *</Typography>
                               <Select
@@ -372,11 +450,11 @@ function AssignJob() {
                          <Box width={'100%'} display={'flex'}>
                               <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
                                    <Typography flex={0.59}>Số ngày thực hiện: *</Typography>
-                                   <Input sx={{ flex: 0.3 }} type='number' defaultValue={14} size='sm' />
+                                   <Input sx={{ flex: 0.3 }} type='number' value={defaultDate ? dayjs(defaultDate).diff(dayjs().subtract(2, 'day'), 'day') : 7} size='sm' />
                               </Box>
                               <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                                   <Typography flex={1}>Ngày hết hạn: *</Typography>
-                                   <Input sx={{ flex: 1 }} type='date' size='sm' />
+                                   <Typography flex={1}>Hạn hoàn thành: *</Typography>
+                                   <Input sx={{ flex: 1 }} type='date' value={defaultDate} onChange={(e) => { setDefaultDate(dayjs(e.target.value).format('YYYY-MM-DD')) }} size='sm' />
                               </Box>
 
                          </Box>
@@ -393,10 +471,90 @@ function AssignJob() {
                               <Typography marginLeft={1} fontSize={12}>anh_minhhoa.png, dung lượng 300mb</Typography>
                               <TextField type='file' size='sm' hidden id='form' />
                          </Box>
-
                     </Box>
-
                </Box>
+               <Collapse in={formNhacViec}>
+                    <Box width={'100%'} display={'flex'} flexDirection={'column'} border={'1px solid gray'} borderRadius={2} padding={3}>
+                         <Box display={'flex'} width={'100%'} paddingLeft={2} >
+                              <Box width={'20%'}>
+                                   Hình thức nhắc việc
+                              </Box>
+                              <Box display={'flex'} width={'80%'}>
+                                   <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'}>
+                                        <Checkbox label="Notification" sx={{ marginLeft: 2 }} />
+                                   </Box>
+                                   <Box display={'flex'} alignItems={'center'}>
+                                        <Checkbox label="Email" sx={{ marginLeft: 2 }} />
+                                   </Box>
+                                   <Box display={'flex'} alignItems={'center'}>
+                                        <Checkbox label="SMS" sx={{ marginLeft: 2 }} />
+                                   </Box>
+                              </Box>
+                         </Box>
+                         <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
+                         <Box display={'flex'} width={'100%'} paddingLeft={2} marginTop={3}>
+                              <Box width={'20%'}>
+                                   Giờ nhắc
+                              </Box>
+                              <Box display={'flex'} width={'80%'}>
+                                   <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'}>
+                                        {listHours.map(ele => {
+                                             return (
+                                                  < Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
+                                             )
+                                        })}
+                                   </Box>
+                              </Box>
+                         </Box>
+                         <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
+                         <Box display={'flex'} width={'100%'} paddingLeft={2} marginTop={3}>
+                              <Box width={'20%'}>
+                                   Theo ngày trong tuần
+                              </Box>
+                              <Box display={'flex'} width={'80%'}>
+                                   <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'}>
+                                        {listday.map(ele => {
+                                             return (
+                                                  < Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
+                                             )
+                                        })}
+                                   </Box>
+                              </Box>
+                         </Box>
+                         <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
+                         <Box display={'flex'} width={'100%'} paddingLeft={2} marginTop={3}>
+                              <Box width={'20%'}>
+                                   Theo ngày trong tháng
+                              </Box>
+                              <Box display={'flex'} width={'80%'}>
+                                   <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'}>
+                                        {listHours.map(ele => {
+                                             return (
+                                                  < Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
+                                             )
+                                        })}
+                                   </Box>
+                              </Box>
+                         </Box>
+                         <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
+                         <Box display={'flex'} width={'100%'} paddingLeft={2} marginTop={3}>
+                              <Box width={'20%'}>
+                                   Theo tháng trong năm
+                              </Box>
+                              <Box display={'flex'} width={'80%'}>
+                                   <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'} >
+                                        {listMonthonYear.map(ele => {
+                                             return (
+                                                  < Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
+                                             )
+                                        })}
+                                   </Box>
+                              </Box>
+                         </Box>
+                    </Box>
+               </Collapse>
+
+
                <Box width={'100%'} padding={2} display={'flex'} flexDirection={'column'}>
                     <Box>
                          <Typography fontSize={22} fontWeight={'bold'}>Phân công thực hiện</Typography>
@@ -442,7 +600,7 @@ function AssignJob() {
                                                                       {ele.open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
                                                                  </Box>
                                                             </StyledTableCell>
-                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio /></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
@@ -461,7 +619,7 @@ function AssignJob() {
                                                                            {element.name}
                                                                       </StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
-                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio /></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> <Checkbox /></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>

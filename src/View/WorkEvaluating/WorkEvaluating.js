@@ -44,7 +44,7 @@ function WorkEvaluating() {
                hanhoanthanh: '15/04/2024',
                ngayhoanthanh: '15/04/2024',
                giohoanthanh: '24',
-               ketqua: 'Đã kí hợp đồng và tiến đến thỏa thuận',
+               ketqua: 'Biên bản dự thảo văn bản góp ý',
                dophuctap: 1,
                xacdinhmucdophuctapcuacongviec: 2,
                danhgiathoigianhoanthanhcongviec: 10,
@@ -59,7 +59,7 @@ function WorkEvaluating() {
                hanhoanthanh: '18/04/2024',
                ngayhoanthanh: '18/04/2024',
                giohoanthanh: '24',
-               ketqua: 'Đã kí hợp đồng và tiến đến thỏa thuận',
+               ketqua: 'Đã hoàn thành tài liệu cho cuộc họp thường trực tuần 14/2024',
                dophuctap: 3,
                xacdinhmucdophuctapcuacongviec: 4,
                danhgiathoigianhoanthanhcongviec: 10,
@@ -127,13 +127,15 @@ function WorkEvaluating() {
      ])
 
      const [openDetail, setOpenDetail] = useState(false)
-
-     const handleOpenDetail = () => {
+     const [name, setName] = useState('')
+     const handleOpenDetail = (value) => {
           setOpenDetail(true)
+          setName(value)
      }
 
      const handleCloseDetail = () => {
           setOpenDetail(false)
+          setName()
      }
 
 
@@ -188,25 +190,23 @@ function WorkEvaluating() {
                     <Button color="success" size='sm' sx={{ marginLeft: 1, marginTop: 1, position: 'fixed', right: 0, top: 105 }} >
                          Lưu đánh giá
                     </Button>
-
                </Box>
                <Box>
                     <TableContainer component={Paper} sx={{ marginTop: 2, borderRadius: 2 }}>
                          <Table size='sm' sx={{ border: '1px solid #e8e8e8', borderRadius: 1 }}>
-
                               <TableHead >
                                    <TableRow>
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}>STT</StyledTableCell>
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}>Tên công việc</StyledTableCell>
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} colSpan={6} rowSpan={2}>Chi tiết</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} colSpan={3}>Đánh giá</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}>Nhận xét</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} colSpan={3}>Người trực tiếp quản lý đánh giá</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}>Ghi chú</StyledTableCell>
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}><Checkbox sx={{ color: 'white' }} /></StyledTableCell>
                                    </TableRow >
                                    <TableRow >
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'} >Độ phức tạp</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'}>Thẩm định thời gian</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'10%'}>Đánh giá hoàn thành</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'} >Mức độ phức tạp</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'}>Thời gian hoàn thành</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Tỷ lệ hoàn thành</StyledTableCell>
                                    </TableRow >
                               </TableHead >
                               <TableBody>
@@ -215,16 +215,14 @@ function WorkEvaluating() {
                                              <TableRow >
                                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid #e8e8e8', borderLeft: '1px solid #e8e8e8' }}>{ele.id}</StyledTableCell>
                                                   <StyledTableCell sx={{ borderRight: '1px solid #e8e8e8' }} width={'20%'}>{ele.name}</StyledTableCell>
-                                                  <StyledTableCell sx={{ borderRight: '1px solid #e8e8e8' }} colSpan={6} width={'30%'} >
-                                                       <b>Ngày giao:</b>  ({ele.ngaygiao} - {ele.ngayhoanthanh})<br />
+                                                  <StyledTableCell sx={{ borderRight: '1px solid #e8e8e8' }} colSpan={6} width={'35%'} >
+                                                       <b>Ngày giao:</b> {ele.ngaygiao} | <b>Hạn hoàn thành:</b> {ele.ngayhoanthanh})<br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                       <b>Hạn hoàn thành:</b> {ele.hanhoanthanh} <br />
+                                                       <b>Ngày hoàn thành thực tế:</b> {ele.hanhoanthanh} <br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                       <b>Thời gian:</b> {ele.giohoanthanh}h <br />
-                                                       <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                       <b>Tự đánh giá:</b> <br />
+                                                       <b>Thời gian thực hiện:</b> {ele.giohoanthanh} giờ <br />
                                                        <b>Độ phức tạp </b> {ele.dophuctap} <br />
-                                                       <b>Hoàn thành </b> {ele.danhgiaxeploaicongviec * 10} % <br />
+                                                       <b>Tỷ lệ hoàn thành </b> {ele.danhgiaxeploaicongviec * 10}% <br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <b>Kết quả:</b> {ele.ketqua} <br />
                                                        <Typography color={'blue'} variant='p'>{ele.tailieu}</Typography><br />
@@ -232,7 +230,7 @@ function WorkEvaluating() {
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <Box marginTop={0.5} border={'1px solid black'} width={'50%'} borderRadius={1}
                                                             sx={{ cursor: 'pointer' }} display={'flex'} alignItems={'center'} justifyContent={'center'}
-                                                            onClick={handleOpenDetail}
+                                                            onClick={() => { handleOpenDetail(ele.name) }}
                                                        >
                                                             Xem chi tiết báo cáo
                                                        </Box>
@@ -314,7 +312,7 @@ function WorkEvaluating() {
                     </TableContainer>
 
                </Box >
-               <DiaLogTableDetailHourse open={openDetail} handleClose={handleCloseDetail} />
+               <DiaLogTableDetailHourse open={openDetail} nameJob={name} handleClose={handleCloseDetail} />
 
           </Box >
      )

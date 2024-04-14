@@ -84,7 +84,8 @@ export default function DiaLogTableDetailHourse(props) {
                     maxWidth={900}
                >
                     <DialogTitle id="alert-dialog-title">
-                         {"Danh sách chi tiết thông tin báo cáo giờ công"}
+                         {"DANH SÁCH CHI TIẾT BÁO CÁO GIỜ CÔNG "}
+                         <b>({props.nameJob})</b>
                     </DialogTitle>
                     <DialogContent>
                          <Box width={1300}>
@@ -92,12 +93,16 @@ export default function DiaLogTableDetailHourse(props) {
                                    <Table size='small'>
                                         <TableHead >
                                              <TableRow>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'}>STT</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'}>Tên công việc</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'33%'}>Nội dung thực hiện</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} rowSpan={2}>STT</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'40%'} rowSpan={2}>Nội dung thực hiện</StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'13%'} colSpan={2}>Thời gian</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'7%'}>Tổng giờ</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'25%'}>Kết quả</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'9%'} rowSpan={2}>Thời gian (giờ)</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} rowSpan={2}>Tiến độ</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'30%'} rowSpan={2}>Kết quả</StyledTableCell>
+                                             </TableRow>
+                                             <TableRow>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} >Bắt đầu</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} >Kết thúc</StyledTableCell>
                                              </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -107,7 +112,6 @@ export default function DiaLogTableDetailHourse(props) {
                                                        return (
                                                             <TableRow>
                                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }}>{ele.id}</StyledTableCell>
-                                                                 <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
                                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.content}
                                                                  </StyledTableCell>
@@ -117,9 +121,13 @@ export default function DiaLogTableDetailHourse(props) {
                                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.end}
                                                                  </StyledTableCell>
-                                                                 <StyledTableCell align='right' sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                                 <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {Number((ele.endnumber - ele.startnumber)) / 100}
                                                                  </StyledTableCell>
+                                                                 <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
+                                                                      {ele.tiendo * 10}%
+                                                                 </StyledTableCell>
+
                                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.ketqua} <br></br>
                                                                       <a href='#' >
