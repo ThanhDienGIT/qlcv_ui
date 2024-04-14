@@ -11,6 +11,7 @@ import Button from '@mui/joy/Button';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Input from '@mui/joy/Input';
+import DiaLogTableDetailHourse from './DiaLogTableDetailHours';
 
 
 function WorkEvaluating() {
@@ -125,6 +126,17 @@ function WorkEvaluating() {
 
      ])
 
+     const [openDetail, setOpenDetail] = useState(false)
+
+     const handleOpenDetail = () => {
+          setOpenDetail(true)
+     }
+
+     const handleCloseDetail = () => {
+          setOpenDetail(false)
+     }
+
+
      return (
           <Box width={'100%'} padding={2} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
                <Box>
@@ -218,7 +230,10 @@ function WorkEvaluating() {
                                                        <Typography color={'blue'} variant='p'>{ele.tailieu}</Typography><br />
                                                        <a id="downloadLink" href="#" download="custom_content.txt">{ele.file}</a>
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                       <Box marginTop={0.5} border={'1px solid black'} width={'50%'} borderRadius={1} sx={{ cursor: 'pointer' }} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+                                                       <Box marginTop={0.5} border={'1px solid black'} width={'50%'} borderRadius={1}
+                                                            sx={{ cursor: 'pointer' }} display={'flex'} alignItems={'center'} justifyContent={'center'}
+                                                            onClick={handleOpenDetail}
+                                                       >
                                                             Xem chi tiết báo cáo
                                                        </Box>
 
@@ -298,9 +313,8 @@ function WorkEvaluating() {
                          </Table >
                     </TableContainer>
 
-
                </Box >
-
+               <DiaLogTableDetailHourse open={openDetail} handleClose={handleCloseDetail} />
 
           </Box >
      )
