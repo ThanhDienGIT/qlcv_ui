@@ -477,8 +477,8 @@ function LogWork() {
                               }) : listMissionPrivate.map(ele => {
                                    return (
                                         <ListItemButton
-                                             sx={{ borderBottom: '1px solid gray', height: 35 }}
-                                             selected={selectedIndex === ele.id}
+                                             sx={Number(selectedIndex === ele.id) ? { borderBottom: '1px solid gray', height: 35, backgroundColor: '#a5e0e6' } : { borderBottom: '1px solid gray', height: 35 }}
+                                             //selected={selectedIndex === ele.id}
                                              onClick={(event) => handleListItemClick(event, ele.id)}
                                         >
                                              <ListItemIcon>
