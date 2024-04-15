@@ -26,6 +26,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BackupIcon from '@mui/icons-material/Backup';
 import RefreshIcon from '@mui/icons-material/Refresh';
+
 function LogWork() {
      const [value, setValue] = React.useState('1');
 
@@ -461,13 +462,12 @@ function LogWork() {
                               {Number(value) === 1 ? listMission.map(ele => {
                                    return (
                                         <ListItemButton
-                                             sx={{ borderBottom: '1px solid gray', height: 35 }}
-                                             selected={selectedIndex === ele.id}
+                                             sx={Number(selectedIndex === ele.id) ? { borderBottom: '1px solid gray', height: 35, backgroundColor: '#a5e0e6' } : { borderBottom: '1px solid gray', height: 35 }}
+                                             // selected={selectedIndex === ele.id}
                                              onClick={(event) => {
                                                   handleListItemClick(event, ele.id)
                                                   chooseWork(ele)
                                              }}
-
                                         >
                                              <ListItemIcon>
                                                   {ele.name}
@@ -573,12 +573,35 @@ function LogWork() {
 
                <Box>
                     <Box display={'flex'} justifyContent={'space-between'} marginTop={2} alignItems={'center'}>
-                         <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Báo cáo hôm nay: {dateRender ? dateRender : ""}</Typography>
-
+                         <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Nhật ký công việc ngày {dateRender ? dateRender : ""}</Typography>
                          {value === '1' ?
-                              ""
+                              <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                   <Typography sx={{ marginRight: 1 }}>
+                                        | Tổng thời gian: 7 giờ |
+                                   </Typography>
+                                   <Typography sx={{ marginRight: 2 }}>
+                                        Trong giờ hành chính: 5 giờ |
+                                   </Typography>
+                                   <Typography sx={{ marginRight: 2 }}>
+                                        Ngoài giờ hành chính: 2 giờ |
+                                   </Typography>
+                              </Box>
+
+
                               :
-                              <DiaLogWork />
+                              <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                   <Typography sx={{ marginRight: 1 }}>
+                                        | Tổng thời gian: 7 giờ |
+                                   </Typography>
+                                   <Typography sx={{ marginRight: 2 }}>
+                                        Trong giờ hành chính: 5 giờ |
+                                   </Typography>
+                                   <Typography sx={{ marginRight: 2 }}>
+                                        Ngoài giờ hành chính: 2 giờ |
+                                   </Typography>
+                                   <DiaLogWork />
+                              </Box>
+
                          }
                          {/* <DiaLogAddWork data={data ? data : []} handleAdd={handleAddLogWork} /> */}
                     </Box>
@@ -719,7 +742,7 @@ function LogWork() {
                     </Table>
                </Box> */}
 
-          </Box>
+          </Box >
      )
 }
 

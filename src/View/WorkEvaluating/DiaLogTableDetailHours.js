@@ -84,8 +84,8 @@ export default function DiaLogTableDetailHourse(props) {
                     maxWidth={900}
                >
                     <DialogTitle id="alert-dialog-title">
-                         {"DANH SÁCH CHI TIẾT BÁO CÁO GIỜ CÔNG "}
-                         <b>({props.nameJob})</b>
+                         {"Chi tiết nhật ký công việc "}
+                         <b>"{props.nameJob}"</b>
                     </DialogTitle>
                     <DialogContent>
                          <Box width={1300}>
@@ -130,13 +130,18 @@ export default function DiaLogTableDetailHourse(props) {
 
                                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.ketqua} <br></br>
-                                                                      <a href='#' >
-                                                                           Tài liệu đính kèm
-                                                                      </a>
-                                                                      <br></br>
-                                                                      <a href='#' download={'././'}>
-                                                                           Tệp đính kèm
-                                                                      </a>
+                                                                      {Number(ele.id) === 1 ?
+                                                                           <>
+                                                                                <a href="#" download={''}>
+                                                                                     {ele.file}
+                                                                                </a>
+                                                                                <a href="#">
+                                                                                     {ele.vanban}
+
+                                                                                </a>
+                                                                           </>
+                                                                           : " "}
+
                                                                  </StyledTableCell>
 
 

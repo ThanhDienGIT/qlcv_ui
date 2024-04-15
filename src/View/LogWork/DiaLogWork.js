@@ -5,7 +5,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box, Divider, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Card, Divider, MenuItem, Select, TextField, Typography } from '@mui/material';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import FormHelperText from '@mui/joy/FormHelperText';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BackupIcon from '@mui/icons-material/Backup';
+import RefreshIcon from '@mui/icons-material/Refresh'
+import dayjs from 'dayjs';
+import Input from '@mui/joy/Input';
+import Textarea from '@mui/joy/Textarea';
+import { TimeField } from '@mui/x-date-pickers/TimeField';
 function DiaLogWork() {
      const [open, setOpen] = React.useState(false);
 
@@ -69,7 +80,85 @@ function DiaLogWork() {
           },
      ])
 
+     const [date, setDate] = React.useState(dayjs().format('DD/MM/YYYY'))
+     const [dateRender, setDateRender] = React.useState(dayjs().format('DD/MM/YYYY'))
+     const today = () => {
+          setDate(dayjs().format('YYYY-MM-DD'))
+          setDateRender(dayjs().format('DD-MM-YYYY'))
+     }
 
+     const yesterday = () => {
+          setDate(dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
+          setDateRender(dayjs().subtract(1, 'day').format('DD-MM-YYYY'))
+     }
+
+
+     const targetRef = React.useRef(null);
+
+
+     const scrollToTarget = () => {
+          // Kiểm tra xem ref có tồn tại không
+          if (targetRef.current) {
+               // Di chuyển đến phần tử đã đánh dấu
+               targetRef.current.scrollIntoView({ behavior: "smooth" });
+          }
+     };
+
+     const [form, setForm] = React.useState({
+          id: 0,
+          idcongviec: 0,
+          content: '',
+          start: dayjs(dayjs().format('YYYY-MM-DD') + "T00:00"),
+          end: dayjs(dayjs().format('YYYY-MM-DD') + "T00:00"),
+          sum: '',
+          progress: '',
+          document: '',
+          file: '',
+          resultcontent: '',
+     })
+
+     const clearForm = () => {
+          setForm({
+               id: 0,
+               idcongviec: 0,
+               content: '',
+               start: dayjs(dayjs().format('YYYY-MM-DD') + "T00:00"),
+               end: dayjs(dayjs().format('YYYY-MM-DD') + "T00:00"),
+               sum: '',
+               progress: '',
+               document: '',
+               file: '',
+               resultcontent: '',
+          })
+     }
+
+     const handleOnChange = (e) => {
+          var name = e.target.name
+          var value = e.target.value
+          setForm(rev => ({ ...rev, [name]: value }))
+     }
+     const handleOnChangeDate = (e, namechange) => {
+          console.log(namechange)
+          console.log(dayjs(e.$d).format('YYYY-MM-DDTHH:mm'))
+          setForm(rev => ({ ...rev, [namechange]: dayjs(dayjs(e.$d).format('YYYY-MM-DDTHH:mm')) }))
+     }
+
+
+     const addScroll = () => {
+          scrollToTarget()
+     }
+
+     const editScroll = () => {
+          scrollToTarget()
+     }
+
+     const submit = () => {
+          console.log(form)
+     }
+
+     const chooseWork = (ele) => {
+          setForm(rev => ({ ...rev, idcongviec: ele.id }))
+     }
 
 
 
@@ -86,66 +175,184 @@ function DiaLogWork() {
                     maxWidth={600}
                >
                     <DialogTitle id="alert-dialog-title">
-                         {"Tạo công việc"}
+                         {"Thêm công việc"}
                     </DialogTitle>
                     <Divider sx={{ borderBottom: '1px solid gray' }} />
                     <DialogContent>
                          <DialogContentText id="alert-dialog-description">
-                              <Box width={700} display={'flex'} flexDirection={'column'} >
-                                   <Box display={'flex'} alignItems={'center'}>
-                                        <Typography flex={1}>
-                                             Nhiệm vụ: *
-                                        </Typography>
-                                        <Select
-                                             defaultValue={2}
-                                             size={'small'} sx={{ flex: 3 }}
-                                        >
-                                             {data && data.length > 0 ? data.map(ele => {
-                                                  return (
-                                                       <MenuItem value={ele.id}>
-                                                            {ele.name}
+                              <Box width={900} display={'flex'} flexDirection={'column'} >
+                                   <Card sx={{ padding: 2 }}>
+                                        <Box display={'flex'} alignItems={'center'}>
+                                             <Typography flex={1}>
+                                                  Nhiệm vụ: *
+                                             </Typography>
+                                             <Select
+                                                  defaultValue={2}
+                                                  size={'small'} sx={{ flex: 3 }}
+                                             >
+                                                  {data && data.length > 0 ? data.map(ele => {
+                                                       return (
+                                                            <MenuItem value={ele.id}>
+                                                                 {ele.name}
+                                                            </MenuItem>
+                                                       )
+                                                  }) : ""}
+
+                                             </Select>
+
+                                        </Box>
+                                        <Box display={'flex'} alignItems={'center'} marginTop={2}>
+                                             <Typography flex={1}>
+                                                  Tên công việc: *
+                                             </Typography>
+                                             <TextField size={'small'} placeholder='Nhập tên công việc' sx={{ flex: 3 }} />
+                                        </Box>
+                                        <Box display={'flex'} alignItems={'center'} marginTop={2}>
+                                             <Typography flex={1}>
+                                                  Người thẩm định: *
+                                             </Typography>
+                                             <Select
+                                                  defaultValue={2}
+                                                  size={'small'} sx={{ flex: 3 }}
+                                             >
+                                                  <MenuItem value={1}>
+                                                       Lê Quốc Huy
+                                                  </MenuItem>
+                                                  <MenuItem value={2}>
+                                                       La Phi Phàm
+                                                  </MenuItem>
+                                                  <MenuItem value={3}>
+                                                       Trần Xuân Hoa
+                                                  </MenuItem>
+                                                  <MenuItem value={4}>
+                                                       Lê Văn Long
+                                                  </MenuItem>
+                                             </Select>
+                                        </Box>
+                                        <Box display={'flex'} marginTop={2}>
+                                             <Typography flex={1}>
+                                                  Nội dung công việc: *
+                                             </Typography>
+                                             <TextField size={'small'} placeholder={'Nội dung công việc'} multiline rows={2} sx={{ flex: 3 }} />
+                                        </Box>
+                                        <Box display={'flex'} marginTop={2} justifyContent={'space-between'}>
+                                             <Box width={'49%'} display={'flex'} alignItems={'center'}>
+                                                  <Typography flex={0.83} >
+                                                       Hạn hoàn thành: *
+                                                  </Typography>
+                                                  <TextField size='small' type='date' />
+                                             </Box>
+                                             <Box width={'49%'} display={'flex'} alignItems={'center'}>
+                                                  <Typography flex={1}>
+                                                       Độ phức tạp: *
+                                                  </Typography>
+
+                                                  <Select
+                                                       defaultValue={2}
+                                                       size={'small'} sx={{ flex: 2 }}
+                                                  >
+                                                       <MenuItem value={1}>
+                                                            1
                                                        </MenuItem>
-                                                  )
-                                             }) : ""}
+                                                       <MenuItem value={2}>
+                                                            2
+                                                       </MenuItem>
+                                                       <MenuItem value={3}>
+                                                            3
+                                                       </MenuItem>
+                                                       <MenuItem value={4}>
+                                                            4
+                                                       </MenuItem>
+                                                       <MenuItem value={4}>
+                                                            5
+                                                       </MenuItem>
+                                                  </Select>
+                                             </Box>
 
-                                        </Select>
-
-                                   </Box>
-                                   <Box display={'flex'} alignItems={'center'} marginTop={2}>
-                                        <Typography flex={1}>
-                                             Tên công việc: *
-                                        </Typography>
-                                        <TextField size={'small'} placeholder='Nhập tên công việc' sx={{ flex: 3 }} />
-                                   </Box>
-                                   <Box display={'flex'} alignItems={'center'} marginTop={2}>
-                                        <Typography flex={1}>
-                                             Người thẩm định: *
-                                        </Typography>
-                                        <Select
-                                             defaultValue={2}
-                                             size={'small'} sx={{ flex: 3 }}
-                                        >
-                                             <MenuItem value={1}>
-                                                  Lê Quốc Huy
-                                             </MenuItem>
-                                             <MenuItem value={2}>
-                                                  La Phi Phàm
-                                             </MenuItem>
-                                             <MenuItem value={3}>
-                                                  Trần Xuân Hoa
-                                             </MenuItem>
-                                             <MenuItem value={4}>
-                                                  Lê Văn Long
-                                             </MenuItem>
-                                        </Select>
-                                   </Box>
+                                        </Box>
+                                   </Card>
                                    <Box display={'flex'} marginTop={2}>
-                                        <Typography flex={1}>
-                                             Nội dung công việc: *
-                                        </Typography>
-                                        <TextField size={'small'} placeholder={'Nội dung công việc'} multiline rows={2} sx={{ flex: 3 }} />
+
+                                        <Box width={'100%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
+                                             <Typography>Nhật ký công việc</Typography>
+                                             <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
+                                                  <Box width={'49%'}>
+                                                       <Box width={'100%'} display={'flex'} marginBottom={2} flexWrap={'wrap'}>
+                                                            <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
+                                                                 <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} flexWrap={'wrap'}>
+                                                                      <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65' }} onClick={yesterday}>
+                                                                           hôm qua
+                                                                      </Button>
+                                                                      <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 1, marginRight: 1 }} onClick={today}>
+                                                                           hôm nay
+                                                                      </Button>
+                                                                      <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
+                                                                           setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
+                                                                           setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
+                                                                      }} />
+                                                                 </Box>
+                                                            </Box>
+                                                       </Box>
+
+                                                       <FormControl>
+                                                            <FormLabel>Nội dung thực hiện</FormLabel>
+                                                            <Textarea name='content' onChange={handleOnChange} value={form.content} placeholder="Nội dung thực hiện..." minRows={2} />
+                                                       </FormControl>
+                                                       <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} flexWrap={'wrap'}>
+                                                            <FormControl>
+                                                                 <FormLabel>Bắt đầu</FormLabel>
+                                                                 <TimeField onChange={(e) => { handleOnChangeDate(e, 'start') }} value={form.start} ampm={false} size='small' sx={{ width: 90 }} />
+                                                            </FormControl>
+
+                                                            <FormControl sx={{ marginLeft: 1 }}>
+                                                                 <FormLabel>Kết thúc</FormLabel>
+                                                                 <TimeField onChange={(e) => { handleOnChangeDate(e, 'end') }} value={form.end} ampm={false} size='small' sx={{ width: 90 }} />
+                                                            </FormControl>
+
+                                                            <FormControl sx={{ marginLeft: 1 }}>
+                                                                 <FormLabel>Thời gian</FormLabel>
+                                                                 <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' sx={{ width: 85 }} />
+                                                            </FormControl>
+                                                            <FormControl sx={{ marginLeft: 1 }}>
+                                                                 <FormLabel>Tiến độ</FormLabel>
+                                                                 <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' sx={{ width: 85 }} />
+                                                            </FormControl>
+                                                       </Box>
+                                                  </Box>
+                                                  <Box width={'49%'}>
+                                                       <Card sx={{ padding: 3 }}>
+                                                            <Typography>Sản phẩm</Typography>
+                                                            <Divider sx={{ borderTop: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
+                                                            <FormControl>
+                                                                 <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành..." minRows={2} />
+                                                            </FormControl>
+                                                            <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                                                                 Văn bản liên quan:
+                                                                 <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                                 <TextField type='file' size='sm' hidden id='form' />
+                                                            </FormControl>
+                                                            <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'flex-start' }}>
+                                                                 <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
+                                                                 <TextField type='file' size='sm' hidden id='form' />
+                                                            </FormControl>
+                                                       </Card>
+
+                                                  </Box>
+                                             </Box>
+                                             <Box sx={{ width: '100%' }} marginTop={2} marginBottom={2} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                                                  <Button variant='contained' sx={{ backgroundColor: '#052c65', width: 120 }} onClick={submit}>
+                                                       Lưu
+                                                  </Button>
+                                                  <Button variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 2, width: 120 }} startIcon={<RefreshIcon />} onClick={clearForm}>
+                                                       Làm mới
+                                                  </Button>
+                                             </Box>
+                                        </Box>
                                    </Box>
+
+
                               </Box>
+
                          </DialogContentText>
                     </DialogContent>
                     <DialogActions sx={{ paddingBottom: 2 }}>

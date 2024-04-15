@@ -205,8 +205,8 @@ function WorkEvaluating() {
                                    </TableRow >
                                    <TableRow >
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'} >Mức độ phức tạp</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'}>Thời gian hoàn thành</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Tỷ lệ hoàn thành</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'}>Thời gian hoàn thành (Giờ)</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Tỷ lệ hoàn thành (%)</StyledTableCell>
                                    </TableRow >
                               </TableHead >
                               <TableBody>
@@ -232,7 +232,7 @@ function WorkEvaluating() {
                                                             sx={{ cursor: 'pointer' }} display={'flex'} alignItems={'center'} justifyContent={'center'}
                                                             onClick={() => { handleOpenDetail(ele.name) }}
                                                        >
-                                                            Xem chi tiết báo cáo
+                                                            Nhật ký chi tiết
                                                        </Box>
 
                                                   </StyledTableCell>
@@ -265,39 +265,7 @@ function WorkEvaluating() {
                                                        <Input fullWidth sx={{ width: 70 }} size='sm' type='number' defaultValue={ele.danhgiathoigianhoanthanhcongviec} />
                                                   </StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #e8e8e8' }} >
-                                                       <Select fullWidth defaultValue={Number(ele.danhgiaxeploaicongviec)} size={'sm'}>
-                                                            <Option value={1}>
-                                                                 10%
-                                                            </Option>
-                                                            <Option value={2}>
-                                                                 20%
-                                                            </Option>
-                                                            <Option value={3}>
-                                                                 30%
-                                                            </Option>
-                                                            <Option value={4}>
-                                                                 40%
-                                                            </Option>
-                                                            <Option value={5}>
-                                                                 50%
-                                                            </Option>
-                                                            <Option value={6}>
-                                                                 60%
-                                                            </Option>
-                                                            <Option value={7}>
-                                                                 70%
-                                                            </Option>
-                                                            <Option value={8}>
-                                                                 80%
-                                                            </Option>
-                                                            <Option value={9}>
-                                                                 90%
-                                                            </Option>
-                                                            <Option value={10}>
-                                                                 100%
-                                                            </Option>
-                                                       </Select>
-
+                                                       <Input type='number' defaultValue={Number(ele.danhgiaxeploaicongviec)} size={'sm'} sx={{ width: 67 }} />
                                                   </StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #e8e8e8' }} width={'25%'} >
                                                        <TextField fullWidth size='sm' defaultValue={ele.ghichu} multiline rows={5} />
