@@ -531,7 +531,7 @@ function LogWork() {
                                              <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' sx={{ width: 85 }} />
                                         </FormControl>
                                         <FormControl sx={{ marginLeft: 1 }}>
-                                             <FormLabel>Tiến độ</FormLabel>
+                                             <FormLabel>Tiến độ %</FormLabel>
                                              <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' sx={{ width: 85 }} />
                                         </FormControl>
                                    </Box>
@@ -614,7 +614,7 @@ function LogWork() {
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'} rowSpan={2}>Nội dung thực hiện</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} colSpan={2}>Thời gian</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} rowSpan={2}>Thời gian (Giờ)</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2}>Tiến độ</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2} width={'7%'}>Tiến độ %</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'26%'} rowSpan={2}>Kết quả</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'15%'} rowSpan={2}>Thao tác</StyledTableCell>
                                    {/* <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'5%'}><Checkbox sx={{ marginTop: 1 }} checked={selectAll} onChange={handleSelectAll} /></StyledTableCell> */}
@@ -644,7 +644,7 @@ function LogWork() {
                                                        {Number((ele.endnumber - ele.startnumber)) / 100}
                                                   </StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }} >
-                                                       {ele.tiendo * 10}%
+                                                       {ele.tiendo * 10}
                                                   </StyledTableCell>
                                                   <StyledTableCell sx={{ borderLeft: '1px solid #f0f0f0' }}>
                                                        <Box display={'flex'} flexDirection={'column'}>
