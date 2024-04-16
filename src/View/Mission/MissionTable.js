@@ -133,8 +133,8 @@ function MissionTable(props) {
                                                   <Checkbox checked={ele.support} name='support' />
                                              </StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                  <EditNoteOutlinedIcon sx={{ color: '#000080', marginRight: 0.4 }} className='cursor' onClick={() => { props.handleOpenEdit(ele) }} />
-                                                  <DeleteOutlineOutlinedIcon sx={{ color: '#000080' }} className='cursor' onClick={props.handleOpenDelete} />
+                                                  <EditNoteOutlinedIcon sx={{ marginRight: 0.4 }} color='warning' className='cursor' onClick={() => { props.handleOpenEdit(ele) }} />
+                                                  <DeleteOutlineOutlinedIcon className='cursor' color='error' onClick={props.handleOpenDelete} />
                                              </StyledTableCell>
                                         </StyledTableRow >
                                    )

@@ -45,6 +45,10 @@
      border-radius: 2px;
      margin-left: 10px;
      cursor: pointer;
+     width: 120px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 }
 
 
@@ -57,4 +61,8 @@
      margin-left: 5px;
      cursor: pointer;
      border-radius: 2px;
+     width: 120px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }

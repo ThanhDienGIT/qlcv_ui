@@ -20,6 +20,7 @@ import Option from '@mui/joy/Option';
 import dayjs from 'dayjs'
 import Checkbox from '@mui/joy/Checkbox';
 import BackupIcon from '@mui/icons-material/Backup';
+import SaveIcon from '@mui/icons-material/Save';
 function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -488,13 +489,13 @@ function AssignJob() {
                     </Box>
                     <Box width={'49%'}>
                          <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                              <Typography variant='p'> Văn bản liên quan:</Typography>
+                              <Typography variant='p' flex={0.3}> Văn bản liên quan:</Typography>
 
                               <label htmlFor='form' className='cssButton2'>+ Thêm</label>
                               <TextField type='file' size='sm' hidden id='form' />
                          </FormControl>
                          <Box display={'flex'} alignItems={'center'} marginTop={1}>
-                              <Typography variant='p'>Đính kèm tệp:</Typography>
+                              <Typography variant='p' flex={0.293}>Đính kèm tệp:</Typography>
                               <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                    <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
                                    <TextField type='file' size='sm' hidden id='form' />
@@ -664,8 +665,10 @@ function AssignJob() {
                          </TableContainer>
                     </Box>
                     <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                         <Button size={'sm'} variant='contained' sx={{ backgroundColor: '#000080', color: 'white' }}>Lưu phân công</Button>
-                         <Button size={'sm'} variant='outlined' sx={{ marginLeft: 2 }}>Hủy</Button>
+                         <Button size={'lg'} variant='contained' sx={{ backgroundColor: '#000080', color: 'white' }}>
+                              Cập nhật
+                         </Button>
+                         <Button size={'lg'} variant='outlined' sx={{ marginLeft: 2 }}>Làm mới</Button>
                     </Box>
 
 

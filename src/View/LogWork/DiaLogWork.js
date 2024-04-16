@@ -276,55 +276,73 @@ function DiaLogWork() {
                                         </Box>
                                    </Card>
                                    <Box display={'flex'} marginTop={2}>
-                                        <Box width={'100%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
+                                        <Box width={'100%'} padding={2} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
                                              <Typography>Nhật ký công việc</Typography>
                                              <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
                                                   <Box width={'100%'}>
                                                        <Box display={'flex'} marginBottom={2} flexWrap={'wrap'}>
-                                                            <Box display={'flex'} alignItems={'center'} flexWrap={'wrap'} >
-                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65' }} onClick={yesterday}>
+                                                            <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
+                                                                 <Button size={'sm'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={yesterday}>
                                                                       {"<"}
                                                                  </Button>
-                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 1, marginRight: 1 }} onClick={today}>
-                                                                      {">"}
-                                                                 </Button>
-                                                                 <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
+                                                                 <Input type='date' sx={{ width: 350, marginLeft: 4, marginRight: 4 }} defaultValue={dateRender} value={date} onChange={(e) => {
                                                                       setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
                                                                       setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
                                                                  }} />
+                                                                 <Button size={'sm'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={today}>
+                                                                      {">"}
+                                                                 </Button>
+
                                                             </Box>
                                                        </Box>
-                                                       <Card sx={{ padding: 2 }}>
-                                                            <FormControl>
-                                                                 <FormLabel>Sản phẩm hoàn thành</FormLabel>
-                                                                 <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" minRows={2} />
-                                                            </FormControl>
-                                                            <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} >
-                                                                 <FormControl sx={{ marginLeft: 1, width: '48%' }}>
-                                                                      <FormLabel>Số giờ</FormLabel>
-                                                                      <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' fullWidth />
-                                                                 </FormControl>
-                                                                 <FormControl sx={{ marginLeft: 1, width: '48%' }}>
-                                                                      <FormLabel>Mức độ hoàn thành %</FormLabel>
-                                                                      <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' fullWidth />
-                                                                 </FormControl>
-                                                            </Box>
-                                                            <Box display={'flex'} marginTop={2} alignItems={'center'}>
-                                                                 <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                                                                      <Typography variant='p'> Văn bản liên quan:</Typography>
 
-                                                                      <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                       <FormControl>
+                                                            <FormLabel>Sản phẩm hoàn thành</FormLabel>
+                                                            <TextField name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" multiline rows={2} />
+                                                       </FormControl>
+                                                       <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} >
+                                                            <FormControl sx={{ width: '48%' }}>
+                                                                 <FormLabel>Số giờ</FormLabel>
+                                                                 <TextField name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'small'} type='number' fullWidth />
+                                                            </FormControl>
+                                                            <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                                                 <FormLabel>Mức độ hoàn thành %</FormLabel>
+                                                                 <Select size='small' defaultValue={40}>
+                                                                      <MenuItem value={20}>
+                                                                           20
+                                                                      </MenuItem>
+                                                                      <MenuItem value={40}>
+                                                                           40
+                                                                      </MenuItem>
+                                                                      <MenuItem value={60}>
+                                                                           60
+                                                                      </MenuItem>
+                                                                      <MenuItem value={80}>
+                                                                           80
+                                                                      </MenuItem>
+                                                                      <MenuItem value={100}>
+                                                                           100
+                                                                      </MenuItem>
+                                                                 </Select>
+
+                                                            </FormControl>
+                                                       </Box>
+                                                       <Box display={'flex'} marginTop={2} alignItems={'center'}>
+                                                            <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                                                                 <Typography variant='p'> Văn bản liên quan:</Typography>
+
+                                                                 <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                                 <TextField type='file' size='sm' hidden id='form' />
+                                                            </FormControl>
+                                                            <Box display={'flex'} alignItems={'center'} marginLeft={2}>
+                                                                 <Typography variant='p'>Đính kèm tệp:</Typography>
+                                                                 <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                                                                      <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 0.5 }} /></label>
                                                                       <TextField type='file' size='sm' hidden id='form' />
                                                                  </FormControl>
-                                                                 <Box display={'flex'} alignItems={'center'} marginLeft={2}>
-                                                                      <Typography variant='p'>Đính kèm tệp:</Typography>
-                                                                      <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
-                                                                           <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 0.5 }} /></label>
-                                                                           <TextField type='file' size='sm' hidden id='form' />
-                                                                      </FormControl>
-                                                                 </Box>
                                                             </Box>
-                                                       </Card>
+                                                       </Box>
+
 
                                                   </Box>
                                              </Box>

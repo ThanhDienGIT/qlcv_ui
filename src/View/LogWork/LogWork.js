@@ -29,6 +29,8 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { Opacity } from '@mui/icons-material';
 import Checkbox from '@mui/joy/Checkbox';
+import AddIcon from '@mui/icons-material/Add';
+import SaveIcon from '@mui/icons-material/Save';
 function LogWork() {
 
 
@@ -443,13 +445,13 @@ function LogWork() {
                                         </Box>
                                         <Box >
                                              <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                                                  <Typography flex={0.6} variant='p'> Văn bản liên quan:</Typography>
+                                                  <Typography flex={0.37} variant='p'> Văn bản liên quan:</Typography>
 
-                                                  <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                  <label htmlFor='form' className='cssButton2'><AddIcon sx={{ marginRight: 0.5 }} /> Thêm</label>
                                                   <TextField type='file' size='sm' hidden id='form' />
                                              </FormControl>
                                              <Box display={'flex'} alignItems={'center'} marginTop={1}>
-                                                  <Typography flex={0.6} variant='p'>Đính kèm tệp:</Typography>
+                                                  <Typography flex={0.362} variant='p'>Đính kèm tệp:</Typography>
                                                   <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                                        <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
                                                        <TextField type='file' size='sm' hidden id='form' />
@@ -461,7 +463,7 @@ function LogWork() {
                               </Box>
                          </Box>
                          <Box sx={{ width: '100%', marginBottom: 1 }} display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
-                              <Button variant='contained' size='small' sx={{ backgroundColor: '#000080' }} onClick={submit}>
+                              <Button variant='contained' size='small' sx={{ backgroundColor: '#000080' }} startIcon={<SaveIcon />} onClick={submit}>
                                    Cập nhật
                               </Button>
                               <Button variant='outlined' size='small' sx={{ border: '1px solid #000080', color: '#000080', marginLeft: 2 }} startIcon={<RefreshIcon />} onClick={clearForm}>
@@ -507,11 +509,11 @@ function LogWork() {
                               </TableRow>
                               <TableRow>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ phức tạp</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm (Giờ)</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành (%)</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ phức tạp</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm (Giờ)</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành (%)</StyledTableCell>
                               </TableRow>
                          </TableHead>
                          <TableBody>
