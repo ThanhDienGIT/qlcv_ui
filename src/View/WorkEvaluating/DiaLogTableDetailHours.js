@@ -40,35 +40,33 @@ export default function DiaLogTableDetailHourse(props) {
                id: 1,
                name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
                content: 'Tham gia dự thảo',
-               start: '07:30',
-               end: '11:30',
-               startnumber: 730,
-               endnumber: 1130,
+               sogio: 2,
                tiendo: 10,
+               ngay: '13/04/2024',
                ketqua: 'Đã hoàn thành',
+               file: 'gopy_v1.docx',
+               link: 'Góp ý điều chỉnh tài liệu tập huấn',
                nhanxet: 'Không có'
           },
           {
                id: 2,
                name: 'Chuẩn bị tài liệu phục vụ cuộc họp Thường trực tuần 14/2024',
                content: 'Chỉnh sửa tài liệu cho cuộc họp',
-               start: '13:20',
-               end: '14:30',
-               startnumber: 1320,
-               endnumber: 1430,
+               sogio: 4,
                tiendo: 5,
+               ngay: '14/04/2024',
                ketqua: '',
+               file: 'noidungcuochop_v1.pdf',
+               link: 'Góp ý điều chỉnh tài liệu tập huấn',
                nhanxet: '',
           },
           {
                id: 3,
                name: 'Chủ trì dự thảo tập huấn',
                content: 'Tham gia điều phối cuộc họp',
-               start: '16:30',
-               end: '17:30',
-               startnumber: 1630,
-               endnumber: 1730,
+               sogio: 6,
                tiendo: 8,
+               ngay: '15/04/2024',
                ketqua: '',
                nhanxet: ''
           },
@@ -88,26 +86,22 @@ export default function DiaLogTableDetailHourse(props) {
                          <b>"{props.nameJob}"</b>
                     </DialogTitle>
                     <DialogContent>
-                         <Box width={1300}>
+                         <Box width={1200}>
                               <TableContainer component={Paper}>
                                    <Table size='small'>
                                         <TableHead >
                                              <TableRow>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} rowSpan={2}>STT</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'40%'} rowSpan={2}>Nội dung thực hiện</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'13%'} colSpan={2}>Thời gian</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'9%'} rowSpan={2}>Thời gian (giờ)</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} rowSpan={2}>Tiến độ</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'30%'} rowSpan={2}>Kết quả</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} >STT</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'40%'} >Nội dung thực hiện</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'9%'} >Thời gian (giờ)</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} >Ngày</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} >Tiến độ</StyledTableCell>
+                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'30%'} >Kết quả</StyledTableCell>
                                              </TableRow>
-                                             <TableRow>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} >Bắt đầu</StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} >Kết thúc</StyledTableCell>
-                                             </TableRow>
+
                                         </TableHead>
                                         <TableBody>
                                              {data && data.length > 0 ?
-
                                                   data.map(ele => {
                                                        return (
                                                             <TableRow>
@@ -116,18 +110,14 @@ export default function DiaLogTableDetailHourse(props) {
                                                                       {ele.content}
                                                                  </StyledTableCell>
                                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                                      {ele.start}
+                                                                      {ele.sogio}
                                                                  </StyledTableCell>
                                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                                      {ele.end}
-                                                                 </StyledTableCell>
-                                                                 <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                                      {Number((ele.endnumber - ele.startnumber)) / 100}
+                                                                      {ele.ngay}
                                                                  </StyledTableCell>
                                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.tiendo * 10}%
                                                                  </StyledTableCell>
-
                                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
                                                                       {ele.ketqua} <br></br>
                                                                       {Number(ele.id) === 1 ?
@@ -135,19 +125,15 @@ export default function DiaLogTableDetailHourse(props) {
                                                                                 <a href="#" download={''}>
                                                                                      {ele.file}
                                                                                 </a>
+                                                                                <br />
                                                                                 <a href="#">
-                                                                                     {ele.vanban}
-
+                                                                                     {ele.link}
                                                                                 </a>
                                                                            </>
                                                                            : " "}
-
                                                                  </StyledTableCell>
-
-
                                                             </TableRow>
                                                        )
-
                                                   }) : ""}
 
                                         </TableBody>

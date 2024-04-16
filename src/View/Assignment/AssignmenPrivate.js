@@ -77,7 +77,7 @@ function AssignmentPrivate() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: '#052c65', borderBottom: '1px solid gray', height: 35 }}>
+                                   <ListItem sx={{ backgroundColor: '#000080', borderBottom: '1px solid gray', height: 35 }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Tên cá nhân
                                         </ListItemIcon>
@@ -177,7 +177,7 @@ function AssignmentPrivate() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
-                                   <ListItem sx={{ backgroundColor: '#052c65', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                                   <ListItem sx={{ backgroundColor: '#000080', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>

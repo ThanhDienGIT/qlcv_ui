@@ -12,12 +12,13 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Input from '@mui/joy/Input';
 import DiaLogTableDetailHourse from './DiaLogTableDetailHours';
+import dayjs from 'dayjs';
 
 
 function WorkEvaluating() {
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           [`&.${tableCellClasses.body}`]: {
@@ -27,7 +28,7 @@ function WorkEvaluating() {
 
      const StyledTableRow = styled(TableRow)(({ theme }) => ({
           '&:nth-of-type(odd)': {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           // hide last border
@@ -41,8 +42,8 @@ function WorkEvaluating() {
                id: 1,
                name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
                ngaygiao: '13/04/2024',
-               hanhoanthanh: '15/04/2024',
-               ngayhoanthanh: '15/04/2024',
+               hanhoanthanh: '2024-04-15',
+               ngayhoanthanh: '2024-04-16',
                giohoanthanh: '24',
                ketqua: 'Biên bản dự thảo văn bản góp ý',
                dophuctap: 1,
@@ -56,8 +57,8 @@ function WorkEvaluating() {
                id: 2,
                name: 'Chuẩn bị tài liệu phục vụ cuộc họp Thường trực tuần 14/2024',
                ngaygiao: '15/04/2024',
-               hanhoanthanh: '18/04/2024',
-               ngayhoanthanh: '18/04/2024',
+               hanhoanthanh: '2024-04-18',
+               ngayhoanthanh: '2024-04-17',
                giohoanthanh: '24',
                ketqua: 'Đã hoàn thành tài liệu cho cuộc họp thường trực tuần 14/2024',
                dophuctap: 3,
@@ -138,6 +139,21 @@ function WorkEvaluating() {
           setName()
      }
 
+     const checkDate = (hanhoanthanh, ngayhoanthanh) => {
+          const startDate = dayjs(hanhoanthanh)
+          const endDate = dayjs(ngayhoanthanh)
+          var bool = false
+          console.log(startDate.diff(endDate))
+          // quá hạn
+          if (startDate.diff(endDate) > 0) {
+               bool = true
+          } else {
+               bool = false
+          }
+          console.log(bool)
+          return bool
+     }
+
 
      return (
           <Box width={'100%'} padding={2} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
@@ -182,7 +198,7 @@ function WorkEvaluating() {
                          </Typography>
                          <Input size='sm' type='date' sx={{ marginLeft: 2 }} />
 
-                         <Button variant='contained' size='sm' sx={{ marginLeft: 2.5, backgroundColor: '#052c65', color: 'white' }} >
+                         <Button variant='contained' size='sm' sx={{ marginLeft: 2.5, backgroundColor: '#000080', color: 'white' }} >
                               Tìm kiếm
                          </Button>
                     </Box>
@@ -206,7 +222,7 @@ function WorkEvaluating() {
                                    <TableRow >
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'} >Mức độ phức tạp</StyledTableCell>
                                         <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'9%'}>Thời gian hoàn thành (Giờ)</StyledTableCell>
-                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Tỷ lệ hoàn thành (%)</StyledTableCell>
+                                        <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'8%'}>Mức độ hoàn thành (%)</StyledTableCell>
                                    </TableRow >
                               </TableHead >
                               <TableBody>
@@ -216,13 +232,16 @@ function WorkEvaluating() {
                                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid #e8e8e8', borderLeft: '1px solid #e8e8e8' }}>{ele.id}</StyledTableCell>
                                                   <StyledTableCell sx={{ borderRight: '1px solid #e8e8e8' }} width={'20%'}>{ele.name}</StyledTableCell>
                                                   <StyledTableCell sx={{ borderRight: '1px solid #e8e8e8' }} colSpan={6} width={'35%'} >
-                                                       <b>Ngày giao:</b> {ele.ngaygiao} | <b>Hạn hoàn thành:</b> {ele.ngayhoanthanh})<br />
+                                                       <b>Ngày giao:</b> {ele.ngaygiao}, <b>Hạn hoàn thành:</b> {dayjs(ele.hanhoanthanh).format('DD-MM-YYYY')}<br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                       <b>Ngày hoàn thành thực tế:</b> {ele.hanhoanthanh} <br />
+                                                       <Typography variant='p' sx={checkDate(ele.hanhoanthanh, ele.ngayhoanthanh) ? { color: 'red' } : { color: 'green' }}>
+                                                            <b>Ngày hoàn thành thực tế:</b> {dayjs(ele.ngayhoanthanh).format('DD-MM-YYYY')} <br />
+                                                       </Typography>
+
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <b>Thời gian thực hiện:</b> {ele.giohoanthanh} giờ <br />
-                                                       <b>Độ phức tạp </b> {ele.dophuctap} <br />
-                                                       <b>Tỷ lệ hoàn thành </b> {ele.danhgiaxeploaicongviec * 10}% <br />
+                                                       <b>Độ phức tạp: </b> {ele.dophuctap} <br />
+                                                       <b>Mức độ hoàn thành: </b> {ele.danhgiaxeploaicongviec * 10}% <br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <b>Kết quả:</b> {ele.ketqua} <br />
                                                        <Typography color={'blue'} variant='p'>{ele.tailieu}</Typography><br />

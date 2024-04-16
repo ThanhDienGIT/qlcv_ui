@@ -108,7 +108,7 @@ function AssignmentMain() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35, backgroundColor: '#052c65', color: 'white' }}>
+                                   <ListItem sx={{ backgroundColor: 'white', borderBottom: '1px solid gray', height: 35, backgroundColor: '#000080', color: 'white' }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Tên phòng ban
                                         </ListItemIcon>
@@ -170,7 +170,7 @@ function AssignmentMain() {
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
-                                   <ListItem sx={{ fontSize: 15, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', backgroundColor: '#052c65', }}>
+                                   <ListItem sx={{ fontSize: 15, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', backgroundColor: '#000080', }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>

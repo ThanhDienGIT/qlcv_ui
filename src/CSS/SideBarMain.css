@@ -1,9 +1,9 @@
 .contained-sidebar {
-     min-height: 150vh;
+     min-height: 200vh;
      background-color: var(--sidebarcolor);
      border: 1px solid rgb(156, 156, 156);
-     width: 15%;
-     min-width: 220px;
+     max-width: 220px;
+     min-width: 210px;
 }
 
 .link {

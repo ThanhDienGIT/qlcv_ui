@@ -23,7 +23,7 @@ function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           [`&.${tableCellClasses.body}`]: {
@@ -33,7 +33,7 @@ function AssignJob() {
 
      const StyledTableRow = styled(TableRow)(({ theme }) => ({
           '&:nth-of-type(odd)': {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           // hide last border
@@ -360,12 +360,32 @@ function AssignJob() {
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
 
                <Box width={'100%'} padding={2}>
-                    <Typography fontSize={22} fontWeight={'bold'}> Thông tin công việc</Typography>
+                    <Box display={'flex'}>
+                         <Typography fontSize={22} fontWeight={'bold'}> Thông tin công việc</Typography>
+                         <Box marginLeft={2} display={'flex'} alignItems={'center'}>
+                              <Typography >Lãnh đạo giao việc:</Typography>
+                              <Select
+                                   defaultValue={3} sx={{ marginLeft: 2 }} size='sm' disabled
+                              >
+                                   <Option value={1}>
+                                        Trương Văn Xuân
+                                   </Option>
+                                   <Option value={2}>
+                                        Lê Hùng Ngọc
+                                   </Option>
+                                   <Option value={3}>
+                                        Nguyễn Trịnh Công
+                                   </Option>
+                              </Select>
+                         </Box>
+                    </Box>
+
                     <Divider sx={{ borderBottom: '1px solid gray' }} />
+
                </Box>
                <Box width={'100%'} padding={2} display={'flex'} justifyContent={'space-between'}>
                     <Box width={'49%'} display={'flex'} flexDirection={'column'}>
-                         <Box width={'100%'} display={'flex'} alignItems={'center'}>
+                         {/* <Box width={'100%'} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Lãnh đạo giao việc: *</Typography>
                               <Select
                                    defaultValue={3} sx={{ flex: 2.4 }} size='sm'
@@ -380,7 +400,7 @@ function AssignJob() {
                                         Nguyễn Trịnh Công
                                    </Option>
                               </Select>
-                         </Box>
+                         </Box> */}
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={1}>Nhiệm vụ: *</Typography>
                               <Select
@@ -401,63 +421,45 @@ function AssignJob() {
                               <Typography flex={1}>Tên công việc: *</Typography>
                               <Input sx={{ flex: 2.4 }} size='sm' />
                          </Box>
-                         <Box width={'100%'} marginTop={1} display={'flex'} >
-                              <Typography flex={1}>Nội dung công việc: *</Typography>
-                              <Textarea sx={{ flex: 2.44 }} size='sm' minRows={2} />
+                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
+                              <Box width={'49%'} display={'flex'} alignItems={'center'}>
+                                   <Typography flex={1}>Độ phức tạp: *</Typography>
+                                   <Select
+                                        defaultValue={3} sx={{ marginLeft: 1, width: 122 }} size='sm'
+                                   >
+                                        <Option value={1}>
+                                             1
+                                        </Option>
+                                        <Option value={2}>
+                                             2
+                                        </Option>
+                                        <Option value={3}>
+                                             3
+                                        </Option>
+                                        <Option value={4}>
+                                             4
+                                        </Option>
+                                        <Option value={5}>
+                                             5
+                                        </Option>
+
+                                   </Select>
+                              </Box>
+                              <Box width={'51%'} display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                   <Typography >Hạn hoàn thành: *</Typography>
+                                   <Input type='date' value={defaultDate} sx={{ marginLeft: 2 }} onChange={(e) => { setDefaultDate(dayjs(e.target.value).format('YYYY-MM-DD')) }} size='sm' />
+                              </Box>
+
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Button size={'sm'} onClick={openCloseCollapse} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
                          </Box>
+
                     </Box>
                     <Box width={'49%'}>
-                         <Box width={'100%'} display={'flex'} alignItems={'center'}>
-                              <Typography flex={1}>Độ phức tạp: *</Typography>
-                              <Select
-                                   defaultValue={3} sx={{ flex: 2.5 }} size='sm'
-                              >
-                                   <Option value={1}>
-                                        1
-                                   </Option>
-                                   <Option value={2}>
-                                        2
-                                   </Option>
-                                   <Option value={3}>
-                                        3
-                                   </Option>
-                                   <Option value={4}>
-                                        4
-                                   </Option>
-                                   <Option value={5}>
-                                        5
-                                   </Option>
 
-                              </Select>
-                         </Box>
-                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={1}>Mức độ công việc:
-                              </Typography>
-                              <Select
-                                   defaultValue={1} sx={{ flex: 2.5 }} size='sm'
-                              >
-                                   <Option value={1}>
-                                        Thường
-                                   </Option>
-                                   <Option value={2}>
-                                        Khẩn cấp
-                                   </Option>
-                              </Select>
-                         </Box>
-                         <Box width={'100%'} display={'flex'}>
-                              <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                                   <Typography flex={0.59}>Số ngày thực hiện: *</Typography>
-                                   <Input sx={{ flex: 0.3 }} type='number' value={defaultDate ? dayjs(defaultDate).diff(dayjs().subtract(2, 'day'), 'day') : 7} size='sm' />
-                              </Box>
-                              <Box width={'50%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                                   <Typography flex={1}>Hạn hoàn thành: *</Typography>
-                                   <Input sx={{ flex: 1 }} type='date' value={defaultDate} onChange={(e) => { setDefaultDate(dayjs(e.target.value).format('YYYY-MM-DD')) }} size='sm' />
-                              </Box>
 
-                         </Box>
+
 
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
                               <Typography flex={0.59}>Văn bản liên quan</Typography>
@@ -556,11 +558,8 @@ function AssignJob() {
 
 
                <Box width={'100%'} padding={2} display={'flex'} flexDirection={'column'}>
-                    <Box>
-                         <Typography fontSize={22} fontWeight={'bold'}>Phân công thực hiện</Typography>
-                         <Divider sx={{ borderBottom: '1px solid gray' }} />
-                    </Box>
-                    <Box display={'flex'} alignItems={'center'} marginTop={2} width={400} >
+
+                    <Box display={'flex'} alignItems={'center'} width={400} >
                          <Input size={'sm'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                               startDecorator={<SearchIcon />}
                          />
@@ -571,13 +570,12 @@ function AssignJob() {
                               <Table size='small'>
                                    <TableHead>
                                         <TableRow>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} rowSpan={2}>STT</StyledTableCell>
+                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} rowSpan={2}>Stt</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'25%'} rowSpan={2}>Phòng ban</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} colSpan={2}>Xử lý chính</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} colSpan={2}>Phối hợp</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} colSpan={2}>Theo dõi</StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'9%'} rowSpan={2}>Ngày bắt đầu</StyledTableCell>
-                                             <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'13%'} rowSpan={2}>Ngày hết hạn</StyledTableCell>
+                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'9%'} rowSpan={2}>Hạn hoàn thành</StyledTableCell>
                                         </TableRow>
                                         <TableRow>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8.9%'}>Phòng ban</StyledTableCell>
@@ -606,7 +604,6 @@ function AssignJob() {
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
-                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngaybatdau}</StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}>{ele.ngayhethan}</StyledTableCell>
                                                        </TableRow>
                                                        {ele.staff && ele.staff.length > 0 ? ele.staff.map((element, index2) => {
@@ -640,7 +637,7 @@ function AssignJob() {
                          </TableContainer>
                     </Box>
                     <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                         <Button size={'sm'} variant='contained' sx={{ backgroundColor: '#052c65', color: 'white' }}>Lưu phân công</Button>
+                         <Button size={'sm'} variant='contained' sx={{ backgroundColor: '#000080', color: 'white' }}>Lưu phân công</Button>
                          <Button size={'sm'} variant='outlined' sx={{ marginLeft: 2 }}>Hủy</Button>
                     </Box>
 

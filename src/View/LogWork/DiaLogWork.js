@@ -82,15 +82,21 @@ function DiaLogWork() {
 
      const [date, setDate] = React.useState(dayjs().format('DD/MM/YYYY'))
      const [dateRender, setDateRender] = React.useState(dayjs().format('DD/MM/YYYY'))
+     const [count, setCount] = React.useState(0)
      const today = () => {
-          setDate(dayjs().format('YYYY-MM-DD'))
-          setDateRender(dayjs().format('DD-MM-YYYY'))
+          setCount(count - 1)
      }
 
      const yesterday = () => {
-          setDate(dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
-          setDateRender(dayjs().subtract(1, 'day').format('DD-MM-YYYY'))
+          setCount(count + 1)
      }
+
+     React.useEffect(() => {
+
+          setDate(dayjs().subtract(count, 'day').format('YYYY-MM-DD'))
+          setDateRender(dayjs().subtract(count, 'day').format('DD-MM-YYYY'))
+
+     }, [count])
 
 
      const targetRef = React.useRef(null);
@@ -160,12 +166,10 @@ function DiaLogWork() {
           setForm(rev => ({ ...rev, idcongviec: ele.id }))
      }
 
-
-
      return (
           <React.Fragment>
-               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }} onClick={handleClickOpen}>
-                    + Thêm công việc
+               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#000080', width: 350 }} onClick={handleClickOpen}>
+                    + Thêm công việc cá nhân
                </Button>
                <Dialog
                     open={open}
@@ -272,81 +276,59 @@ function DiaLogWork() {
                                         </Box>
                                    </Card>
                                    <Box display={'flex'} marginTop={2}>
-
                                         <Box width={'100%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
                                              <Typography>Nhật ký công việc</Typography>
                                              <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
-                                                  <Box width={'49%'}>
-                                                       <Box width={'100%'} display={'flex'} marginBottom={2} flexWrap={'wrap'}>
-                                                            <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
-                                                                 <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} flexWrap={'wrap'}>
-                                                                      <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65' }} onClick={yesterday}>
-                                                                           hôm qua
-                                                                      </Button>
-                                                                      <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 1, marginRight: 1 }} onClick={today}>
-                                                                           hôm nay
-                                                                      </Button>
-                                                                      <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
-                                                                           setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
-                                                                           setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
-                                                                      }} />
-                                                                 </Box>
+                                                  <Box width={'100%'}>
+                                                       <Box display={'flex'} marginBottom={2} flexWrap={'wrap'}>
+                                                            <Box display={'flex'} alignItems={'center'} flexWrap={'wrap'} >
+                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65' }} onClick={yesterday}>
+                                                                      {"<"}
+                                                                 </Button>
+                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 1, marginRight: 1 }} onClick={today}>
+                                                                      {">"}
+                                                                 </Button>
+                                                                 <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
+                                                                      setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
+                                                                      setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
+                                                                 }} />
                                                             </Box>
                                                        </Box>
-
-                                                       <FormControl>
-                                                            <FormLabel>Nội dung thực hiện</FormLabel>
-                                                            <Textarea name='content' onChange={handleOnChange} value={form.content} placeholder="Nội dung thực hiện..." minRows={2} />
-                                                       </FormControl>
-                                                       <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} flexWrap={'wrap'}>
+                                                       <Card sx={{ padding: 2 }}>
                                                             <FormControl>
-                                                                 <FormLabel>Bắt đầu</FormLabel>
-                                                                 <TimeField onChange={(e) => { handleOnChangeDate(e, 'start') }} value={form.start} ampm={false} size='small' sx={{ width: 90 }} />
+                                                                 <FormLabel>Sản phẩm hoàn thành</FormLabel>
+                                                                 <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" minRows={2} />
                                                             </FormControl>
+                                                            <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} >
+                                                                 <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                                                      <FormLabel>Số giờ</FormLabel>
+                                                                      <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' fullWidth />
+                                                                 </FormControl>
+                                                                 <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                                                      <FormLabel>Mức độ hoàn thành %</FormLabel>
+                                                                      <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' fullWidth />
+                                                                 </FormControl>
+                                                            </Box>
+                                                            <Box display={'flex'} marginTop={2} alignItems={'center'}>
+                                                                 <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                                                                      <Typography variant='p'> Văn bản liên quan:</Typography>
 
-                                                            <FormControl sx={{ marginLeft: 1 }}>
-                                                                 <FormLabel>Kết thúc</FormLabel>
-                                                                 <TimeField onChange={(e) => { handleOnChangeDate(e, 'end') }} value={form.end} ampm={false} size='small' sx={{ width: 90 }} />
-                                                            </FormControl>
-
-                                                            <FormControl sx={{ marginLeft: 1 }}>
-                                                                 <FormLabel>Thời gian</FormLabel>
-                                                                 <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' sx={{ width: 85 }} />
-                                                            </FormControl>
-                                                            <FormControl sx={{ marginLeft: 1 }}>
-                                                                 <FormLabel>Tiến độ</FormLabel>
-                                                                 <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' sx={{ width: 85 }} />
-                                                            </FormControl>
-                                                       </Box>
-                                                  </Box>
-                                                  <Box width={'49%'}>
-                                                       <Card sx={{ padding: 3 }}>
-                                                            <Typography>Sản phẩm</Typography>
-                                                            <Divider sx={{ borderTop: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                                            <FormControl>
-                                                                 <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành..." minRows={2} />
-                                                            </FormControl>
-                                                            <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                                                                 Văn bản liên quan:
-                                                                 <label htmlFor='form' className='cssButton2'>+ Thêm</label>
-                                                                 <TextField type='file' size='sm' hidden id='form' />
-                                                            </FormControl>
-                                                            <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'flex-start' }}>
-                                                                 <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
-                                                                 <TextField type='file' size='sm' hidden id='form' />
-                                                            </FormControl>
+                                                                      <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                                      <TextField type='file' size='sm' hidden id='form' />
+                                                                 </FormControl>
+                                                                 <Box display={'flex'} alignItems={'center'} marginLeft={2}>
+                                                                      <Typography variant='p'>Đính kèm tệp:</Typography>
+                                                                      <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                                                                           <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 0.5 }} /></label>
+                                                                           <TextField type='file' size='sm' hidden id='form' />
+                                                                      </FormControl>
+                                                                 </Box>
+                                                            </Box>
                                                        </Card>
 
                                                   </Box>
                                              </Box>
-                                             <Box sx={{ width: '100%' }} marginTop={2} marginBottom={2} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                                                  <Button variant='contained' sx={{ backgroundColor: '#052c65', width: 120 }} onClick={submit}>
-                                                       Lưu
-                                                  </Button>
-                                                  <Button variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 2, width: 120 }} startIcon={<RefreshIcon />} onClick={clearForm}>
-                                                       Làm mới
-                                                  </Button>
-                                             </Box>
+
                                         </Box>
                                    </Box>
 
@@ -358,10 +340,10 @@ function DiaLogWork() {
                     <DialogActions sx={{ paddingBottom: 2 }}>
 
                          <Button size={'small'} onClick={handleClose} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
-                              Lưu thay đổi
+                              Cập nhật
                          </Button>
                          <Button size={'small'} onClick={handleClose} variant='outlined' sx={{ marginRight: 2 }}>
-                              Hủy
+                              Quay lại
                          </Button>
                     </DialogActions>
                </Dialog>

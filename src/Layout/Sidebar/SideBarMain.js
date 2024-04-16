@@ -80,7 +80,7 @@ function SideBarMain() {
                     {
                          id: 15,
                          path: '',
-                         name: 'Danh mục nhiệm vụ'
+                         name: 'Danh mục loại công việc'
                     },
                     {
                          id: 16,
@@ -229,7 +229,7 @@ function SideBarMain() {
                                                        <List component="div" disablePadding sx={{ backgroundColor: 'white', borderBottom: '1px solid rgb(128, 128, 128)', }}>
                                                             <Link to={Element.path} className='link'>
                                                                  <ListItemButton sx={{ display: 'flex', alignItems: 'center', borderBottom: '1px dotted black' }}>
-                                                                      <Typography fontSize={12} >{Element.name}</Typography>
+                                                                      <Typography fontSize={12}>{Element.name}</Typography>
                                                                  </ListItemButton>
                                                             </Link>
                                                        </List>

@@ -40,7 +40,7 @@ function Mission() {
                          Tên nhiệm vụ:
                     </Typography>
                     <TextField sx={{ marginLeft: 2 }} size='small' />
-                    <Button variant='contained' size={'small'} sx={{ marginLeft: 2, backgroundColor: '#052c65' }}>Tìm kiếm</Button>
+                    <Button variant='contained' size={'small'} sx={{ marginLeft: 2, backgroundColor: '#000080' }}>Tìm kiếm</Button>
                     <Button variant='outlined' size={'small'} sx={{ marginLeft: 1, color: 'black', border: '1px solid gray' }} >Bỏ lọc</Button>
                </Box>
                <Box padding={2}>

@@ -15,7 +15,7 @@ function MissionTable(props) {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           [`&.${tableCellClasses.body}`]: {
@@ -25,7 +25,7 @@ function MissionTable(props) {
 
      const StyledTableRow = styled(TableRow)(({ theme }) => ({
           '&:nth-of-type(odd)': {
-               backgroundColor: '#052c65',
+               backgroundColor: '#ededed',
                color: 'white',
           },
           // hide last border
@@ -119,7 +119,7 @@ function MissionTable(props) {
                          <TableBody>
                               {data && data.length > 0 ? data.map(ele => {
                                    return (
-                                        <TableRow>
+                                        <StyledTableRow >
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.id}</StyledTableCell>
                                              <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
                                              <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.describe}</StyledTableCell>
@@ -133,10 +133,10 @@ function MissionTable(props) {
                                                   <Checkbox checked={ele.support} name='support' />
                                              </StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                  <EditNoteOutlinedIcon sx={{ color: '#052c65', marginRight: 0.4 }} className='cursor' onClick={() => { props.handleOpenEdit(ele) }} />
-                                                  <DeleteOutlineOutlinedIcon sx={{ color: '#052c65' }} className='cursor' onClick={props.handleOpenDelete} />
+                                                  <EditNoteOutlinedIcon sx={{ color: '#000080', marginRight: 0.4 }} className='cursor' onClick={() => { props.handleOpenEdit(ele) }} />
+                                                  <DeleteOutlineOutlinedIcon sx={{ color: '#000080' }} className='cursor' onClick={props.handleOpenDelete} />
                                              </StyledTableCell>
-                                        </TableRow>
+                                        </StyledTableRow >
                                    )
                               })
                                    : "Không có dữ liệu"}

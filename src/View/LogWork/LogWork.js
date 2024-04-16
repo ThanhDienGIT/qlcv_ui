@@ -1,4 +1,4 @@
-import { Box, Button, Card, Checkbox, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, MenuItem, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, Checkbox, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, MenuItem, Paper, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -26,33 +26,32 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BackupIcon from '@mui/icons-material/Backup';
 import RefreshIcon from '@mui/icons-material/Refresh';
-
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import { Opacity } from '@mui/icons-material';
 function LogWork() {
-     const [value, setValue] = React.useState('1');
 
-     const handleChange = (event, newValue) => {
-          setValue(newValue);
-     };
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#052c65',
+               backgroundColor: '#000080',
                color: 'white',
           },
           [`&.${tableCellClasses.body}`]: {
                fontSize: 13,
+               cursor: 'pointer',
+               border: '1px solid #d9d9d9',
+               opacity: 0.9
           },
      }));
 
      const StyledTableRow = styled(TableRow)(({ theme }) => ({
-          '&:nth-of-type(odd)': {
-               backgroundColor: '#052c65',
-               color: 'white',
-          },
           // hide last border
           '&:last-child td, &:last-child th': {
                border: 0,
           },
+          '&:hover': {
+               backgroundColor: '#ccccff',
+          }
      }));
 
      const [dataRender, setDataRender] = useState([
@@ -96,130 +95,126 @@ function LogWork() {
                nhanxet: ''
           },
      ])
-     const [listMission, setListMission] = React.useState([
-          {
-               id: 1,
-               name: 'Soạn thảo nghị quyết',
-               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
-               leader: true,
-               specialize: true,
-               support: false,
-          },
-          {
-               id: 2,
-               name: 'Soạn thảo công văn trình lãnh đạo',
-               describe: 'Soạn thảo công văn theo nghị định trình lãnh đạo xét duyệt',
-               leader: true,
-               specialize: true,
-               support: true,
-          },
-          {
-               id: 3,
-               name: 'Tham dự tập huấn cán bộ',
-               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
-               leader: true,
-               specialize: false,
-               support: false,
-          },
-          {
-               id: 4,
-               name: 'Chủ trì dự thảo tập huấn',
-               describe: 'Chuẩn bị và điều phối cuộc họp',
-               leader: false,
-               specialize: true,
-               support: false,
-          },
-          {
-               id: 5,
-               name: 'Họp chi bộ',
-               describe: 'Chuẩn bị và điều phối cuộc họp',
-               leader: false,
-               specialize: true,
-               support: true,
-          },
+
+     const [listMissionRender, setListMissionRender] = useState([
           {
                id: 6,
-               name: 'Tham gia học nghị quyết',
-               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
-               leader: false,
-               specialize: true,
-               support: true,
-          },
-          {
-               id: 7,
-               name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
-               describe: 'Tham gia khóa học về soạn thảo, bố cục nghị quyết',
-               leader: false,
-               specialize: true,
-               support: true,
-          },
-     ])
-
-
-     const [listMissionPrivate, setListMissionPrivate] = React.useState([
-          {
+               name: 'Công việc cá nhân',
+               hanhoanthanh: '2024-04-17',
+               childs: [
+                    {
+                         id: 7,
+                         name: 'Chuẩn bị điều phối cuộc họp',
+                         hanhoanthanh: '2024-04-16'
+                    },
+                    {
+                         id: 8,
+                         name: 'Họp chi bộ',
+                         hanhoanthanh: '2024-04-17'
+                    },
+                    {
+                         id: 9,
+                         name: 'Tham gia học nghị quyết',
+                         hanhoanthanh: '2024-04-17'
+                    },
+                    {
+                         id: 10,
+                         name: 'Tổ chức cuộc họp nghị quyết',
+                         hanhoanthanh: '2024-04-18'
+                    },
+                    {
+                         id: 11,
+                         name: 'Thiết kế banner cho cuộc hợp',
+                         hanhoanthanh: '2024-04-19'
+                    },
+               ]
+          }
+          , {
                id: 1,
-               name: 'Chủ trì cuộc họp dự án',
-               describe: 'Soạn thảo nghị quyết trình lãnh đạo',
-               leader: true,
-               specialize: true,
-               support: false,
-          },
-          {
-               id: 2,
-               name: 'Tham gia lớp tập huấn',
-               describe: 'Đã tham gia',
-               leader: true,
-               specialize: true,
-               support: true,
-          },
-          {
-               id: 3,
-               name: 'Tham dự tập huấn về ý thức làm việc cán bộ',
-               describe: 'Tham dự tập huấn về quy trình công tác dành cho cán bộ',
-               leader: true,
-               specialize: false,
-               support: false,
-          },
+               name: 'Công việc được giao',
+               hanhoanthanh: '2024-04-17',
+               childs: [
+                    {
+                         id: 1,
+                         name: 'Soạn thảo nghị quyết',
+                         hanhoanthanh: '2024-04-20'
+                    },
+                    {
+                         id: 2,
+                         name: 'Soạn thảo công văn trình lãnh đạo',
+                         hanhoanthanh: '2024-04-23'
+                    },
+                    {
+                         id: 3,
+                         name: 'Tham dự tập huấn cán bộ',
+                         hanhoanthanh: '2024-04-25'
+                    },
+                    {
+                         id: 4,
+                         name: 'Chủ trì dự thảo tập huấn',
+                         hanhoanthanh: '2024-04-25'
+                    },
+                    {
+                         id: 5,
+                         name: 'Tổ chức ngày hội thể thao',
+                         hanhoanthanh: '2024-04-26'
+                    },
 
+               ]
+          },
      ])
 
      const [data, setData] = useState([
           {
                id: 1,
-               name: 'Công việc 1',
-               content: 'Nội dung công việc 1',
-               start: '07:30',
-               end: '11:30',
-               startnumber: 730,
-               endnumber: 1130,
-               tiendo: 10,
+               name: 'Chuẩn bị điều phối cuộc họp',
+               content: 'Đã điều phối',
+               ngayduocgiao: '13/04/2024',
+               hanhoanthanh: '14/04/2024',
+               ngayhoanthanh: '14/04/2024',
+               mucdophuctapcanhan: 2,
+               thoigianhoanthanhcanhan: 8,
+               mucdohoanthanhcanhan: 100,
+               mucdophuctapdanhgia: 3,
+               thoigiandanhgia: 10,
+               mucdohoanthanh: 90,
+               ketquadanhgia: 'Hoàn thành ở mức khá',
                ketqua: 'Đã hoàn thành',
-               nhanxet: 'Không có'
+               ghichu: 'Không có'
           },
           {
                id: 2,
-               name: 'Công việc 2',
-               content: 'Nội dung công việc 2',
-               start: '13:20',
-               end: '14:30',
-               startnumber: 1320,
-               endnumber: 1430,
-               tiendo: 5,
-               ketqua: '',
-               nhanxet: '',
+               name: 'Tham dự tập huấn cán bộ',
+               content: 'Đã tham dự',
+               ngayduocgiao: '14/04/2024',
+               hanhoanthanh: '15/04/2024',
+               ngayhoanthanh: '15/04/2024',
+               mucdophuctapcanhan: 2,
+               thoigianhoanthanhcanhan: 4,
+               mucdohoanthanhcanhan: 100,
+               mucdophuctapdanhgia: 1,
+               thoigiandanhgia: 4,
+               mucdohoanthanh: 100,
+               ketquadanhgia: 'Hoàn thành tốt',
+               ketqua: 'Đã hoàn thành',
+               ghichu: 'Không có'
           },
           {
                id: 3,
-               name: 'Công việc 3',
-               content: 'Nội dung công việc 3',
-               start: '16:30',
-               end: '17:30',
-               startnumber: 1630,
-               endnumber: 1730,
-               tiendo: 8,
-               ketqua: '',
-               nhanxet: ''
+               name: 'Chủ trì dự thảo tập huấn',
+               content: 'Đã chủ trì',
+               ngayduocgiao: '13/04/2024',
+               hanhoanthanh: '14/04/2024',
+               ngayhoanthanh: '14/04/2024',
+               mucdophuctapcanhan: 3,
+               thoigianhoanthanhcanhan: 8,
+               mucdohoanthanhcanhan: 100,
+               mucdophuctapdanhgia: 5,
+               thoigiandanhgia: 8,
+               mucdohoanthanh: 50,
+               ketquadanhgia: 'Chủ trì buổi dự thảo không tốt còn mắc nhiều lỗi chủ trì',
+               ketqua: 'Chưa đạt',
+               ghichu: 'Cần bổ túc 1 khóa học lại'
           },
      ])
 
@@ -228,50 +223,7 @@ function LogWork() {
      const handleListItemClick = (event, index) => {
           setSelectedIndex(index);
      };
-     useEffect(() => {
-          if (Number(value) === 1) {
-               setDataRender([
-                    {
-                         id: 1,
-                         name: 'Dự thảo văn bản góp ý Đề án Vị trí việc làm',
-                         content: 'Ghi chú lại những góp ý trong cuộc họp',
-                         start: `${dayjs().format('YYYY-MM-DD')}T07:30`,
-                         end: `${dayjs().format('YYYY-MM-DD')}T11:30`,
-                         startnumber: 730,
-                         endnumber: 1130,
-                         tiendo: 10,
-                         ketqua: 'Đã hoàn thành',
-                         nhanxet: 'Không có'
-                    },
-                    {
-                         id: 2,
-                         name: 'Chủ trì dự thảo tài liệu tập huấn',
-                         content: 'Chỉnh sửa tài liệu dự thảo tập huấn',
-                         start: `${dayjs().format('YYYY-MM-DD')}T13:20`,
-                         end: `${dayjs().format('YYYY-MM-DD')}T14:30`,
-                         startnumber: 1320,
-                         endnumber: 1430,
-                         tiendo: 5,
-                         ketqua: '',
-                         nhanxet: '',
-                    },
-                    {
-                         id: 3,
-                         name: 'Họp chi bộ',
-                         content: 'Tham gia họp',
-                         start: `${dayjs().format('YYYY-MM-DD')}T16:30`,
-                         end: `${dayjs().format('YYYY-MM-DD')}T17:30`,
-                         startnumber: 1630,
-                         endnumber: 1730,
-                         tiendo: 8,
-                         ketqua: '',
-                         nhanxet: ''
-                    },
-               ])
-          } else {
-               setDataRender([])
-          }
-     }, [value])
+
 
      const handleAddLogWork = (value) => {
           console.log(value)
@@ -295,70 +247,49 @@ function LogWork() {
 
      const handleSelectAll = () => {
 
-          if (Number(value) === 1) {
-               const arr = [...data]
-               setSelectAll(!selectAll)
-               arr.map(ele => {
-                    ele.select = !selectAll
-               })
-               setDataRender(arr);
-          } else {
-               const arr = [...dataRender]
-               setSelectAll(!selectAll)
-               arr.map(ele => {
-                    ele.select = !selectAll
-               })
-               setDataRender(arr);
-          }
+          const arr = [...data]
+          setSelectAll(!selectAll)
+          arr.map(ele => {
+               ele.select = !selectAll
+          })
+          setDataRender(arr);
 
      }
 
      const handleSelectsingle = (e, ele) => {
-
-          if (Number(value) === 1) {
-               const arr = [...data]
-               arr.map(element => {
-                    if (ele.id === element.id) {
-                         element.select = !element.select
-                    }
-               })
-               if (arr.some(x => x.select === false)) {
-                    setSelectAll(false)
-               } else {
-                    setSelectAll(true)
+          const arr = [...data]
+          arr.map(element => {
+               if (ele.id === element.id) {
+                    element.select = !element.select
                }
-
-               setDataRender(arr);
+          })
+          if (arr.some(x => x.select === false)) {
+               setSelectAll(false)
           } else {
-               const arr = [...dataRender]
-               arr.map(element => {
-                    if (ele.id === element.id) {
-                         element.select = !element.select
-                    }
-               })
-               if (arr.some(x => x.select === false)) {
-                    setSelectAll(false)
-               } else {
-                    setSelectAll(true)
-               }
-
-               setDataRender(arr);
+               setSelectAll(true)
           }
 
+          setDataRender(arr);
      }
 
 
      const [date, setDate] = useState(dayjs().format('DD/MM/YYYY'))
      const [dateRender, setDateRender] = useState(dayjs().format('DD/MM/YYYY'))
+     const [count, setCount] = useState(0)
      const today = () => {
-          setDate(dayjs().format('YYYY-MM-DD'))
-          setDateRender(dayjs().format('DD-MM-YYYY'))
+          setCount(count - 1)
      }
 
      const yesterday = () => {
-          setDate(dayjs().subtract(1, 'day').format('YYYY-MM-DD'))
-          setDateRender(dayjs().subtract(1, 'day').format('DD-MM-YYYY'))
+          setCount(count + 1)
      }
+
+     useEffect(() => {
+
+          setDate(dayjs().subtract(count, 'day').format('YYYY-MM-DD'))
+          setDateRender(dayjs().subtract(count, 'day').format('DD-MM-YYYY'))
+
+     }, [count])
 
 
      const targetRef = useRef(null);
@@ -428,230 +359,181 @@ function LogWork() {
           setForm(rev => ({ ...rev, idcongviec: ele.id }))
      }
 
+
      return (
           <Box width={'100%'} padding={2} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
                <Box ref={targetRef}>
                     <Box width={'100%'} padding={1}>
-                         <Typography fontSize={22} fontWeight={'bold'} > Báo cáo công việc</Typography>
+                         <Typography fontSize={22} fontWeight={'bold'} > Nhật ký công việc</Typography>
                          <Divider sx={{ borderBottom: '1px solid gray' }} />
                     </Box>
                </Box>
-               <Box>
-                    <Tabs
-                         value={value}
-                         onChange={handleChange}
-                         aria-label="Disabled tabs" defaultValue={0}>
-                         <TabList>
-                              <Tab value="1" label="Công việc được giao">Công việc được giao</Tab>
-                              <Tab value="2" label="Công việc cá nhân" >Công việc cá nhân</Tab>
-                         </TabList>
-                    </Tabs>
-                    <Divider sx={{ borderBottom: '1px solid gray', marginTop: 2 }} />
-               </Box>
-
-
 
                <Box padding={2} width={'100%'} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }} borderRadius={1} display={'flex'} justifyContent={'space-between'}>
-                    <Box width={'30%'} display={'flex'} flexDirection={'column'}>
-                         <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', borderRadius: 1, flexWrap: 'wrap', marginTop: 1, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                              <ListItem sx={{ backgroundColor: '#052c65', borderBottom: '1px solid gray', height: 35 }}>
-                                   <ListItemIcon sx={{ color: 'white' }}>
-                                        Danh sách công việc
-                                   </ListItemIcon>
-                              </ListItem>
-                              {Number(value) === 1 ? listMission.map(ele => {
-                                   return (
-                                        <ListItemButton
-                                             sx={Number(selectedIndex === ele.id) ? { borderBottom: '1px solid gray', height: 35, backgroundColor: '#a5e0e6' } : { borderBottom: '1px solid gray', height: 35 }}
-                                             // selected={selectedIndex === ele.id}
-                                             onClick={(event) => {
-                                                  handleListItemClick(event, ele.id)
-                                                  chooseWork(ele)
-                                             }}
-                                        >
-                                             <ListItemIcon>
-                                                  {ele.name}
-                                             </ListItemIcon>
-                                        </ListItemButton>
-                                   )
-                              }) : listMissionPrivate.map(ele => {
-                                   return (
-                                        <ListItemButton
-                                             sx={Number(selectedIndex === ele.id) ? { borderBottom: '1px solid gray', height: 35, backgroundColor: '#a5e0e6' } : { borderBottom: '1px solid gray', height: 35 }}
-                                             //selected={selectedIndex === ele.id}
-                                             onClick={(event) => handleListItemClick(event, ele.id)}
-                                        >
-                                             <ListItemIcon>
-                                                  {ele.name}
-                                             </ListItemIcon>
-                                        </ListItemButton>
-                                   )
-                              })}
+                    <Box width={'68%'} display={'flex'} flexDirection={'column'}>
+                         <DiaLogWork />
+                         <TableContainer component={Paper} sx={{ marginTop: 1, padding: 1, height: 400 }}>
+                              <Table stickyHeader size='small'>
+                                   <TableHead >
+                                        <TableRow>
+                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} >STT</StyledTableCell>
+                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'40%'} >Tên công việc</StyledTableCell>
+                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'} >Hạn hoàn thành</StyledTableCell>
+                                        </TableRow>
+                                   </TableHead>
+                                   <TableBody>
+                                        {listMissionRender.map(ele => {
+                                             return (
+                                                  <>
+                                                       <TableRow sx={{ backgroundColor: '#e1e1e3' }}>
+                                                            <StyledTableCell align='left' sx={{ borderRight: '1px solid white' }} colSpan={3}> {ele.name}</StyledTableCell>
+                                                       </TableRow>
+                                                       {ele.childs.map(element => {
+                                                            return (
+                                                                 <StyledTableRow onClick={() => { setSelectedIndex(element.id) }} sx={element.id === selectedIndex ? { backgroundColor: '#ccccff', opacity: 0.9 } : ""} >
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'} >{element.id}</StyledTableCell>
+                                                                      <StyledTableCell sx={{ borderRight: '1px solid white' }} width={'40%'} >{element.name}</StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'} >{dayjs(element.hanhoanthanh).format('DD/MM/YYYY')}</StyledTableCell>
+                                                                 </StyledTableRow>
+                                                            )
+                                                       })}
 
-                         </List>
+                                                  </>
+                                             )
+                                        })}
+
+                                   </TableBody>
+                              </Table>
+                         </TableContainer>
                     </Box>
 
-                    <Box width={'69%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
+                    <Box display={'flex'} flexDirection={'column'} justifyContent={'space-between'} width={'30%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
                          <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
-                              <Box width={'49%'}>
-                                   <Box width={'100%'} display={'flex'} marginBottom={2} flexWrap={'wrap'}>
-                                        <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
-                                             <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'} flexWrap={'wrap'}>
-                                                  <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65' }} onClick={yesterday}>
-                                                       hôm qua
-                                                  </Button>
-                                                  <Button size={'small'} variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 1, marginRight: 1 }} onClick={today}>
-                                                       hôm nay
-                                                  </Button>
-                                                  <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
-                                                       setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
-                                                       setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
-                                                  }} />
-                                             </Box>
+                              <Box width={'100%'}>
+                                   <Box display={'flex'} marginBottom={2} flexWrap={'wrap'}>
+                                        <Box width={'100%'} display={'flex'} alignItems={'center'} flexWrap={'wrap'} justifyContent={'space-between'} >
+                                             <Button size={'small'} variant='outlined' sx={{ border: '1px solid #000080', color: '#000080' }} onClick={yesterday}>
+                                                  {"<"}
+                                             </Button>
+                                             <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
+                                                  setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
+                                                  setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
+                                             }} />
+                                             <Button size={'small'} variant='outlined' sx={{ border: '1px solid #000080', color: '#000080' }} onClick={today}>
+                                                  {">"}
+                                             </Button>
+
                                         </Box>
                                    </Box>
-
-                                   <FormControl>
-                                        <FormLabel>Nội dung thực hiện</FormLabel>
-                                        <Textarea name='content' onChange={handleOnChange} value={form.content} placeholder="Nội dung thực hiện..." minRows={2} />
-                                   </FormControl>
-                                   <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} flexWrap={'wrap'}>
+                                   <Card sx={{ padding: 2 }}>
                                         <FormControl>
-                                             <FormLabel>Bắt đầu</FormLabel>
-                                             <TimeField onChange={(e) => { handleOnChangeDate(e, 'start') }} value={form.start} ampm={false} size='small' sx={{ width: 90 }} />
+                                             <FormLabel>Sản phẩm hoàn thành</FormLabel>
+                                             <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" minRows={2} />
                                         </FormControl>
+                                        <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} >
+                                             <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                                  <FormLabel>Số giờ</FormLabel>
+                                                  <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' fullWidth />
+                                             </FormControl>
+                                             <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                                  <FormLabel>Mức độ hoàn thành %</FormLabel>
+                                                  <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' fullWidth />
+                                             </FormControl>
+                                        </Box>
+                                        <Box >
+                                             <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                                                  <Typography flex={0.6} variant='p'> Văn bản liên quan:</Typography>
 
-                                        <FormControl sx={{ marginLeft: 1 }}>
-                                             <FormLabel>Kết thúc</FormLabel>
-                                             <TimeField onChange={(e) => { handleOnChangeDate(e, 'end') }} value={form.end} ampm={false} size='small' sx={{ width: 90 }} />
-                                        </FormControl>
-
-                                        <FormControl sx={{ marginLeft: 1 }}>
-                                             <FormLabel>Thời gian</FormLabel>
-                                             <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' sx={{ width: 85 }} />
-                                        </FormControl>
-                                        <FormControl sx={{ marginLeft: 1 }}>
-                                             <FormLabel>Tiến độ %</FormLabel>
-                                             <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' sx={{ width: 85 }} />
-                                        </FormControl>
-                                   </Box>
-                              </Box>
-                              <Box width={'49%'}>
-                                   <Card sx={{ padding: 3 }}>
-                                        <Typography>Sản phẩm</Typography>
-                                        <Divider sx={{ borderTop: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
-                                        <FormControl>
-                                             <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành..." minRows={2} />
-                                        </FormControl>
-                                        <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                                             Văn bản liên quan:
-                                             <label htmlFor='form' className='cssButton2'>+ Thêm</label>
-                                             <TextField type='file' size='sm' hidden id='form' />
-                                        </FormControl>
-                                        <FormControl sx={{ marginTop: 1, display: 'flex', alignItems: 'flex-start' }}>
-                                             <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
-                                             <TextField type='file' size='sm' hidden id='form' />
-                                        </FormControl>
+                                                  <label htmlFor='form' className='cssButton2'>+ Thêm</label>
+                                                  <TextField type='file' size='sm' hidden id='form' />
+                                             </FormControl>
+                                             <Box display={'flex'} alignItems={'center'} marginTop={1}>
+                                                  <Typography flex={0.6} variant='p'>Đính kèm tệp:</Typography>
+                                                  <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                                                       <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
+                                                       <TextField type='file' size='sm' hidden id='form' />
+                                                  </FormControl>
+                                             </Box>
+                                        </Box>
                                    </Card>
 
                               </Box>
                          </Box>
-                         <Box sx={{ width: '100%' }} marginTop={2} marginBottom={2} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-                              <Button variant='contained' sx={{ backgroundColor: '#052c65', width: 120 }} onClick={submit}>
-                                   Lưu
+                         <Box sx={{ width: '100%', marginBottom: 1 }} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                              <Button variant='contained' size='small' sx={{ backgroundColor: '#000080' }} onClick={submit}>
+                                   Cập nhật
                               </Button>
-                              <Button variant='outlined' sx={{ border: '1px solid #052c65', color: '#052c65', marginLeft: 2, width: 120 }} startIcon={<RefreshIcon />} onClick={clearForm}>
+                              <Button variant='outlined' size='small' sx={{ border: '1px solid #000080', color: '#000080', marginLeft: 2 }} startIcon={<RefreshIcon />} onClick={clearForm}>
                                    Làm mới
                               </Button>
+                              <Tooltip title={'Xác nhận hoàn thành công việc'}>
+                                   <IconButton sx={{ marginLeft: 1 }}>
+                                        <EventAvailableIcon color='success' />
+                                   </IconButton>
+                              </Tooltip>
+
                          </Box>
                     </Box>
 
                </Box>
-
 
                <Divider sx={{ borderBottom: '1px solid gray', marginTop: 2 }} />
 
                <Box>
                     <Box display={'flex'} justifyContent={'space-between'} marginTop={2} alignItems={'center'}>
                          <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Nhật ký công việc ngày {dateRender ? dateRender : ""}</Typography>
-                         {value === '1' ?
-                              <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
-                                   <Typography sx={{ marginRight: 1 }}>
-                                        | Tổng thời gian: 7 giờ |
-                                   </Typography>
-                                   <Typography sx={{ marginRight: 2 }}>
-                                        Trong giờ hành chính: 5 giờ |
-                                   </Typography>
-                                   <Typography sx={{ marginRight: 2 }}>
-                                        Ngoài giờ hành chính: 2 giờ |
-                                   </Typography>
-                              </Box>
-
-
-                              :
-                              <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
-                                   <Typography sx={{ marginRight: 1 }}>
-                                        | Tổng thời gian: 7 giờ |
-                                   </Typography>
-                                   <Typography sx={{ marginRight: 2 }}>
-                                        Trong giờ hành chính: 5 giờ |
-                                   </Typography>
-                                   <Typography sx={{ marginRight: 2 }}>
-                                        Ngoài giờ hành chính: 2 giờ |
-                                   </Typography>
-                                   <DiaLogWork />
-                              </Box>
-
-                         }
+                         <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                              <Typography sx={{ marginRight: 1 }}>
+                                   Tổng thời gian: 7 giờ
+                              </Typography>
+                         </Box>
                          {/* <DiaLogAddWork data={data ? data : []} handleAdd={handleAddLogWork} /> */}
                     </Box>
 
                     <Table size='small' sx={{ marginTop: 1 }}>
                          <TableHead>
                               <TableRow>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>STT</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'18%'} rowSpan={2}>Tên công việc</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'20%'} rowSpan={2}>Nội dung thực hiện</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} colSpan={2}>Thời gian</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'} rowSpan={2}>Thời gian (Giờ)</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} rowSpan={2} width={'7%'}>Tiến độ %</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'26%'} rowSpan={2}>Kết quả</StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'15%'} rowSpan={2}>Thao tác</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Stt</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Tên nhiệm vụ hoặc công việc</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Ngày, tháng, năm được giao</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Ngày, tháng, năm phải hoàn thành</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Ngày, tháng, năm hoàn thành thực tế</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Sản phẩm đầu ra</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} colSpan={3}>Cá nhân tự đánh giá</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} colSpan={3}>Người trực tiếp quản lý đánh giá</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Kết quả đánh giá đạt được KPI</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Ghi chú</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} rowSpan={2}>Thao tác</StyledTableCell>
                                    {/* <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} width={'5%'}><Checkbox sx={{ marginTop: 1 }} checked={selectAll} onChange={handleSelectAll} /></StyledTableCell> */}
                               </TableRow>
                               <TableRow>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'10%'} >Bắt đầu </StyledTableCell>
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'8%'}>Kết thúc</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ phức tạp</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ phức tạp</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Thời gian hoàn thành sản phẩm</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }}>Mức độ hoàn thành</StyledTableCell>
                               </TableRow>
                          </TableHead>
                          <TableBody>
-                              {dataRender && dataRender.length > 0 ?
-                                   dataRender.map(ele => {
+                              {
+                                   data.map(ele => {
                                         return (
                                              <TableRow>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }}>{ele.id}</StyledTableCell>
-                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >{ele.name}</StyledTableCell>
-                                                  <StyledTableCell sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                       {ele.content}
-                                                  </StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                       {ele.start.slice(11)}
-                                                  </StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                       {ele.end.slice(11)}
-                                                  </StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderRight: '1px solid #f0f0f0' }} >
-                                                       {Number((ele.endnumber - ele.startnumber)) / 100}
-                                                  </StyledTableCell>
-                                                  <StyledTableCell align='center' sx={{ borderLeft: '1px solid #f0f0f0' }} >
-                                                       {ele.tiendo * 10}
-                                                  </StyledTableCell>
-                                                  <StyledTableCell sx={{ borderLeft: '1px solid #f0f0f0' }}>
-                                                       <Box display={'flex'} flexDirection={'column'}>
-                                                            {ele.ketqua} <br></br>
-                                                            {ele.tiendo === 10 ? <a href='#' download={''}>van_ban_du_thao.pdf</a> : ""}
-                                                       </Box>
-                                                  </StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.id}</StyledTableCell>
+                                                  <StyledTableCell width={'9%'}>{ele.name}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.ngayduocgiao}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.hanhoanthanh}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.ngayhoanthanh}</StyledTableCell>
+                                                  <StyledTableCell width={'9%'}>{ele.ketqua}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.mucdophuctapcanhan}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.thoigianhoanthanhcanhan}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.mucdohoanthanhcanhan}</StyledTableCell>
+                                                  <StyledTableCell align='center' width={'3%'}>{ele.mucdophuctapdanhgia}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.thoigiandanhgia}</StyledTableCell>
+                                                  <StyledTableCell align='center'>{ele.mucdohoanthanh}</StyledTableCell>
+                                                  <StyledTableCell width={'9%'}>{ele.ketquadanhgia}</StyledTableCell>
+                                                  <StyledTableCell width={'9%'}>{ele.ghichu}</StyledTableCell>
                                                   <StyledTableCell sx={{ borderLeft: '1px solid #f0f0f0' }}>
                                                        <IconButton>
                                                             <EditIcon color={'warning'} onClick={() => { editScroll(ele) }} />
@@ -660,11 +542,16 @@ function LogWork() {
                                                             <DeleteIcon color={'error'} />
                                                        </IconButton>
                                                   </StyledTableCell>
-                                                  {/* <StyledTableCell align='center' sx={{ border: '1px solid #f0f0f0' }} width={'5%'}><Checkbox checked={ele.select} onChange={(e) => { handleSelectsingle(e, ele) }} /></StyledTableCell> */}
                                              </TableRow>
                                         )
+                                   })
+                              }
 
-                                   }) : ""}
+
+
+
+
+
                          </TableBody>
                     </Table>
                </Box>

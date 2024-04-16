@@ -2,14 +2,14 @@
      padding-left: 4px;
      padding-right: 4px;
      height: 30px;
-     border: 1px dashed gray;
+     border: 1px dashed #000080;
      border-radius: 5px;
 }
 
 .cssLabel2 {
      padding: 3px;
      height: 30px;
-     background-color: gray;
+     background-color: #000080;
      border-radius: 5px;
      color: white;
 }
@@ -18,7 +18,7 @@
      padding-left: 4px;
      padding-right: 4px;
      height: 30px;
-     border: 1px dashed gray;
+     border: 1px dashed #000080;
      border-radius: 5px;
      font-size: 12px;
      display: flex;
@@ -29,7 +29,7 @@
 .cssLabel4 {
      padding: 3px;
      height: 30px;
-     background-color: gray;
+     background-color: #000080;
      border-radius: 5px;
      color: white;
      font-size: 12px;
@@ -41,14 +41,20 @@
 
 .cssButton {
      border: 1px solid black;
-     padding: 8px;
+     padding: 3px;
+     border-radius: 2px;
+     margin-left: 10px;
+     cursor: pointer;
 }
 
+
 .cssButton2 {
-     background-color: #052c65;
-     padding: 6px;
+     background-color: #000080;
+     padding: 3px;
      padding-left: 12px;
      padding-right: 12px;
      color: white;
-     margin-left: 5px
+     margin-left: 5px;
+     cursor: pointer;
+     border-radius: 2px;
 }
