@@ -79,7 +79,7 @@ function SideBarMain() {
                     },
                     {
                          id: 15,
-                         path: '',
+                         path: 'mission',
                          name: 'Danh mục loại công việc'
                     },
                     {
@@ -139,11 +139,7 @@ function SideBarMain() {
                          path: 'assignmentprivate',
                          name: 'Phân công nhiệm vụ cá nhân'
                     },
-                    {
-                         id: 26,
-                         path: 'mission',
-                         name: 'Danh mục nhiệm vụ'
-                    },
+
                ]
           },
           {

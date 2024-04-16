@@ -1,5 +1,5 @@
 import { Box, Checkbox, Divider, Paper, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -49,7 +49,7 @@ function WorkEvaluating() {
                dophuctap: 1,
                xacdinhmucdophuctapcuacongviec: 2,
                danhgiathoigianhoanthanhcongviec: 10,
-               danhgiaxeploaicongviec: 5,
+               danhgiaxeploaicongviec: 85,
                tailieu: 'Góp ý điều chỉnh tài liệu tập huấn',
                file: 'gopy_v1.docx',
                ghichu: ''
@@ -64,7 +64,7 @@ function WorkEvaluating() {
                dophuctap: 3,
                xacdinhmucdophuctapcuacongviec: 4,
                danhgiathoigianhoanthanhcongviec: 10,
-               danhgiaxeploaicongviec: 3,
+               danhgiaxeploaicongviec: 90,
                tailieu: 'Tài liệu về nội dung cuộc họp',
                file: 'noidungcuochop_v1.pdf',
                ghichu: ''
@@ -143,17 +143,27 @@ function WorkEvaluating() {
           const startDate = dayjs(hanhoanthanh)
           const endDate = dayjs(ngayhoanthanh)
           var bool = false
-          console.log(startDate.diff(endDate))
           // quá hạn
           if (startDate.diff(endDate) > 0) {
-               bool = true
-          } else {
                bool = false
+          } else {
+               bool = true
           }
-          console.log(bool)
           return bool
      }
 
+     const [finishArray, setFinishArray] = useState([])
+     const createDefaultValue = () => {
+          const arr = []
+          for (var i = 1; i <= 20; i++) {
+               const value = i * 5;
+               arr.push(value)
+          }
+          return arr
+     }
+     useEffect(() => {
+          setFinishArray(createDefaultValue())
+     }, [])
 
      return (
           <Box width={'100%'} padding={2} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
@@ -241,7 +251,7 @@ function WorkEvaluating() {
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <b>Thời gian thực hiện:</b> {ele.giohoanthanh} giờ <br />
                                                        <b>Độ phức tạp: </b> {ele.dophuctap} <br />
-                                                       <b>Mức độ hoàn thành: </b> {ele.danhgiaxeploaicongviec * 10}% <br />
+                                                       <b>Mức độ hoàn thành: </b> {ele.danhgiaxeploaicongviec}% <br />
                                                        <Divider sx={{ borderBottom: '1px solid gray', marginTop: 1, marginBottom: 1 }} />
                                                        <b>Kết quả:</b> {ele.ketqua} <br />
                                                        <Typography color={'blue'} variant='p'>{ele.tailieu}</Typography><br />
@@ -262,7 +272,7 @@ function WorkEvaluating() {
                                              <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} >{ele.ketqua}</StyledTableCell>
                                              <StyledTableCell align='center' sx={{ borderLeft: '1px solid white' }} >{ele.dophuctap}</StyledTableCell> */}
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #e8e8e8' }} >
-                                                       <Select fullWidth defaultValue={Number(ele.danhgiaxeploaicongviec)} size={'sm'}>
+                                                       <Select fullWidth defaultValue={Number(ele.dophuctap)} size={'sm'}>
                                                             <Option value={1}>
                                                                  1
                                                             </Option>
@@ -284,7 +294,16 @@ function WorkEvaluating() {
                                                        <Input fullWidth sx={{ width: 70 }} size='sm' type='number' defaultValue={ele.danhgiathoigianhoanthanhcongviec} />
                                                   </StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #e8e8e8' }} >
-                                                       <Input type='number' defaultValue={Number(ele.danhgiaxeploaicongviec)} size={'sm'} sx={{ width: 67 }} />
+                                                       <Select fullWidth defaultValue={Number(ele.danhgiaxeploaicongviec)} size={'sm'}>
+                                                            {finishArray && finishArray.length > 0 ? finishArray.map(ele => {
+                                                                 return (
+                                                                      <Option value={ele}>
+                                                                           {ele}
+                                                                      </Option>
+                                                                 )
+                                                            }) : ""}
+                                                       </Select>
+
                                                   </StyledTableCell>
                                                   <StyledTableCell align='center' sx={{ borderLeft: '1px solid #e8e8e8' }} width={'25%'} >
                                                        <TextField fullWidth size='sm' defaultValue={ele.ghichu} multiline rows={5} />

@@ -1,5 +1,5 @@
-import { Box, Collapse, Divider, InputAdornment, Radio, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Collapse, Divider, FormControl, InputAdornment, Radio, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import SettingsIcon from '@mui/icons-material/Settings';
 import '../../CSS/AssignJob.css'
 import SearchIcon from '@mui/icons-material/Search';
@@ -19,6 +19,7 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import dayjs from 'dayjs'
 import Checkbox from '@mui/joy/Checkbox';
+import BackupIcon from '@mui/icons-material/Backup';
 function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -273,7 +274,7 @@ function AssignJob() {
           setData(arrFilter)
      }
 
-     const [defaultDate, setDefaultDate] = useState(dayjs().add(7, 'day').format('YYYY-MM-DD'))
+     const [defaultDate, setDefaultDate] = useState(dayjs().format('YYYY-MM-DD'))
 
      const [formNhacViec, setFormNhacViec] = useState(false)
 
@@ -339,22 +340,50 @@ function AssignJob() {
 
      const [listMonthonYear, setlistMonthonYear] = useState([
           { id: 1, name: '1' },
-          { id: 1, name: '2' },
-          { id: 1, name: '3' },
-          { id: 1, name: '4' },
-          { id: 1, name: '5' },
-          { id: 1, name: '6' },
-          { id: 1, name: '7' },
-          { id: 1, name: '8' },
-          { id: 1, name: '9' },
-          { id: 1, name: '10' },
-          { id: 1, name: '11' },
-          { id: 1, name: '12' },
+          { id: 2, name: '2' },
+          { id: 3, name: '3' },
+          { id: 4, name: '4' },
+          { id: 5, name: '5' },
+          { id: 6, name: '6' },
+          { id: 7, name: '7' },
+          { id: 8, name: '8' },
+          { id: 9, name: '9' },
+          { id: 10, name: '10' },
+          { id: 11, name: '11' },
+          { id: 12, name: '12' },
      ])
 
      const openCloseCollapse = () => {
           setFormNhacViec(!formNhacViec)
      }
+
+     const [phuctap, setPhuctap] = useState(3)
+
+     const handleChangePhucTap = () => {
+          if (phuctap === 1) {
+               setDefaultDate(dayjs().add(2, 'day').format('YYYY-MM-DD'))
+          }
+          if (phuctap === 2) {
+               setDefaultDate(dayjs().add(4, 'day').format('YYYY-MM-DD'))
+          }
+          if (phuctap === 3) {
+               setDefaultDate(dayjs().add(5, 'day').format('YYYY-MM-DD'))
+          }
+          if (phuctap === 4) {
+               setDefaultDate(dayjs().add(10, 'day').format('YYYY-MM-DD'))
+          }
+          if (phuctap === 5) {
+               setDefaultDate(dayjs().add(15, 'day').format('YYYY-MM-DD'))
+          }
+     }
+
+     useEffect(() => {
+          handleChangePhucTap()
+     }, [phuctap])
+
+     const handleChange = (event, newValue) => {
+          setPhuctap(newValue)
+     };
 
      return (
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
@@ -425,7 +454,9 @@ function AssignJob() {
                               <Box width={'49%'} display={'flex'} alignItems={'center'}>
                                    <Typography flex={1}>Độ phức tạp: *</Typography>
                                    <Select
-                                        defaultValue={3} sx={{ marginLeft: 1, width: 122 }} size='sm'
+                                        sx={{ marginLeft: 1, width: 122 }} size='sm'
+                                        value={phuctap}
+                                        onChange={handleChange}
                                    >
                                         <Option value={1}>
                                              1
@@ -442,7 +473,6 @@ function AssignJob() {
                                         <Option value={5}>
                                              5
                                         </Option>
-
                                    </Select>
                               </Box>
                               <Box width={'51%'} display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
@@ -457,21 +487,18 @@ function AssignJob() {
 
                     </Box>
                     <Box width={'49%'}>
+                         <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+                              <Typography variant='p'> Văn bản liên quan:</Typography>
 
-
-
-
-                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.59}>Văn bản liên quan</Typography>
-                              <label htmlFor='form' className='cssLabel' >+ Chọn văn bản</label>
-                              <Typography marginLeft={1} fontSize={12}>vanban_hanhchinh.docs, dung lượng 500kb</Typography>
+                              <label htmlFor='form' className='cssButton2'>+ Thêm</label>
                               <TextField type='file' size='sm' hidden id='form' />
-                         </Box>
-                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Typography flex={0.59}>File đính kèm:</Typography>
-                              <label htmlFor='form' className='cssLabel2'>Tải tệp lên</label>
-                              <Typography marginLeft={1} fontSize={12}>anh_minhhoa.png, dung lượng 300mb</Typography>
-                              <TextField type='file' size='sm' hidden id='form' />
+                         </FormControl>
+                         <Box display={'flex'} alignItems={'center'} marginTop={1}>
+                              <Typography variant='p'>Đính kèm tệp:</Typography>
+                              <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
+                                   <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
+                                   <TextField type='file' size='sm' hidden id='form' />
+                              </FormControl>
                          </Box>
                     </Box>
                </Box>

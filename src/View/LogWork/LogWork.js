@@ -1,4 +1,4 @@
-import { Box, Button, Card, Checkbox, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, MenuItem, Paper, TextField, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Card, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, MenuItem, Paper, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -28,6 +28,7 @@ import BackupIcon from '@mui/icons-material/Backup';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { Opacity } from '@mui/icons-material';
+import Checkbox from '@mui/joy/Checkbox';
 function LogWork() {
 
 
@@ -103,27 +104,27 @@ function LogWork() {
                hanhoanthanh: '2024-04-17',
                childs: [
                     {
-                         id: 7,
+                         id: 1,
                          name: 'Chuẩn bị điều phối cuộc họp',
                          hanhoanthanh: '2024-04-16'
                     },
                     {
-                         id: 8,
+                         id: 2,
                          name: 'Họp chi bộ',
                          hanhoanthanh: '2024-04-17'
                     },
                     {
-                         id: 9,
+                         id: 3,
                          name: 'Tham gia học nghị quyết',
                          hanhoanthanh: '2024-04-17'
                     },
                     {
-                         id: 10,
+                         id: 4,
                          name: 'Tổ chức cuộc họp nghị quyết',
                          hanhoanthanh: '2024-04-18'
                     },
                     {
-                         id: 11,
+                         id: 5,
                          name: 'Thiết kế banner cho cuộc hợp',
                          hanhoanthanh: '2024-04-19'
                     },
@@ -135,27 +136,27 @@ function LogWork() {
                hanhoanthanh: '2024-04-17',
                childs: [
                     {
-                         id: 1,
+                         id: 6,
                          name: 'Soạn thảo nghị quyết',
                          hanhoanthanh: '2024-04-20'
                     },
                     {
-                         id: 2,
+                         id: 7,
                          name: 'Soạn thảo công văn trình lãnh đạo',
                          hanhoanthanh: '2024-04-23'
                     },
                     {
-                         id: 3,
+                         id: 8,
                          name: 'Tham dự tập huấn cán bộ',
                          hanhoanthanh: '2024-04-25'
                     },
                     {
-                         id: 4,
+                         id: 9,
                          name: 'Chủ trì dự thảo tập huấn',
                          hanhoanthanh: '2024-04-25'
                     },
                     {
-                         id: 5,
+                         id: 10,
                          name: 'Tổ chức ngày hội thể thao',
                          hanhoanthanh: '2024-04-26'
                     },
@@ -178,9 +179,9 @@ function LogWork() {
                mucdophuctapdanhgia: 3,
                thoigiandanhgia: 10,
                mucdohoanthanh: 90,
-               ketquadanhgia: 'Hoàn thành ở mức khá',
-               ketqua: 'Đã hoàn thành',
-               ghichu: 'Không có'
+               ketquadanhgia: '',
+               ketqua: 'Đã điều phối cuộc họp',
+               ghichu: ''
           },
           {
                id: 2,
@@ -191,13 +192,13 @@ function LogWork() {
                ngayhoanthanh: '15/04/2024',
                mucdophuctapcanhan: 2,
                thoigianhoanthanhcanhan: 4,
-               mucdohoanthanhcanhan: 100,
-               mucdophuctapdanhgia: 1,
-               thoigiandanhgia: 4,
-               mucdohoanthanh: 100,
-               ketquadanhgia: 'Hoàn thành tốt',
-               ketqua: 'Đã hoàn thành',
-               ghichu: 'Không có'
+               mucdohoanthanhcanhan: 50,
+               mucdophuctapdanhgia: '',
+               thoigiandanhgia: '',
+               mucdohoanthanh: '',
+               ketquadanhgia: '',
+               ketqua: '',
+               ghichu: ''
           },
           {
                id: 3,
@@ -208,13 +209,13 @@ function LogWork() {
                ngayhoanthanh: '14/04/2024',
                mucdophuctapcanhan: 3,
                thoigianhoanthanhcanhan: 8,
-               mucdohoanthanhcanhan: 100,
-               mucdophuctapdanhgia: 5,
-               thoigiandanhgia: 8,
-               mucdohoanthanh: 50,
-               ketquadanhgia: 'Chủ trì buổi dự thảo không tốt còn mắc nhiều lỗi chủ trì',
-               ketqua: 'Chưa đạt',
-               ghichu: 'Cần bổ túc 1 khóa học lại'
+               mucdohoanthanhcanhan: 40,
+               mucdophuctapdanhgia: '',
+               thoigiandanhgia: '',
+               mucdohoanthanh: '',
+               ketquadanhgia: '',
+               ketqua: '',
+               ghichu: ''
           },
      ])
 
@@ -370,7 +371,7 @@ function LogWork() {
                </Box>
 
                <Box padding={2} width={'100%'} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }} borderRadius={1} display={'flex'} justifyContent={'space-between'}>
-                    <Box width={'68%'} display={'flex'} flexDirection={'column'}>
+                    <Box width={'55%'} display={'flex'} flexDirection={'column'}>
                          <DiaLogWork />
                          <TableContainer component={Paper} sx={{ marginTop: 1, padding: 1, height: 400 }}>
                               <Table stickyHeader size='small'>
@@ -407,19 +408,19 @@ function LogWork() {
                          </TableContainer>
                     </Box>
 
-                    <Box display={'flex'} flexDirection={'column'} justifyContent={'space-between'} width={'30%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
+                    <Box display={'flex'} flexDirection={'column'} justifyContent={'space-between'} width={'44%'} padding={1} paddingLeft={3} borderRadius={1} sx={{ boxShadow: 'rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px' }}>
                          <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
                               <Box width={'100%'}>
                                    <Box display={'flex'} marginBottom={2} flexWrap={'wrap'}>
-                                        <Box width={'100%'} display={'flex'} alignItems={'center'} flexWrap={'wrap'} justifyContent={'space-between'} >
-                                             <Button size={'small'} variant='outlined' sx={{ border: '1px solid #000080', color: '#000080' }} onClick={yesterday}>
+                                        <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
+                                             <Button size={'small'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={yesterday}>
                                                   {"<"}
                                              </Button>
-                                             <Input type='date' size={'sm'} defaultValue={dateRender} value={date} onChange={(e) => {
+                                             <Input type='date' size={'sm'} sx={{ width: 350, marginLeft: 4, marginRight: 4 }} defaultValue={dateRender} value={date} onChange={(e) => {
                                                   setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
                                                   setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
                                              }} />
-                                             <Button size={'small'} variant='outlined' sx={{ border: '1px solid #000080', color: '#000080' }} onClick={today}>
+                                             <Button size={'small'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={today}>
                                                   {">"}
                                              </Button>
 
@@ -427,17 +428,17 @@ function LogWork() {
                                    </Box>
                                    <Card sx={{ padding: 2 }}>
                                         <FormControl>
-                                             <FormLabel>Sản phẩm hoàn thành</FormLabel>
-                                             <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" minRows={2} />
+                                             <FormLabel>Sản phẩm hoàn thành...</FormLabel>
+                                             <Textarea name='resultcontent' onChange={handleOnChange} value={form.resultcontent} placeholder="Sản phẩm hoàn thành" minRows={3} />
                                         </FormControl>
                                         <Box marginTop={1} marginBottom={1} display={'flex'} alignItems={'center'} >
-                                             <FormControl sx={{ marginLeft: 1, width: '48%' }}>
+                                             <FormControl sx={{ width: '48%' }}>
                                                   <FormLabel>Số giờ</FormLabel>
-                                                  <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'lg'} type='number' fullWidth />
+                                                  <Input name='sum' onChange={handleOnChange} value={Number(form.sum)} size={'sm'} type='number' fullWidth />
                                              </FormControl>
                                              <FormControl sx={{ marginLeft: 1, width: '48%' }}>
                                                   <FormLabel>Mức độ hoàn thành %</FormLabel>
-                                                  <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'lg'} type='number' fullWidth />
+                                                  <Input name='progress' onChange={handleOnChange} value={Number(form.progress)} size={'sm'} type='number' fullWidth />
                                              </FormControl>
                                         </Box>
                                         <Box >
@@ -459,7 +460,7 @@ function LogWork() {
 
                               </Box>
                          </Box>
-                         <Box sx={{ width: '100%', marginBottom: 1 }} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                         <Box sx={{ width: '100%', marginBottom: 1 }} display={'flex'} justifyContent={'flex-end'} alignItems={'center'}>
                               <Button variant='contained' size='small' sx={{ backgroundColor: '#000080' }} onClick={submit}>
                                    Cập nhật
                               </Button>
@@ -467,9 +468,7 @@ function LogWork() {
                                    Làm mới
                               </Button>
                               <Tooltip title={'Xác nhận hoàn thành công việc'}>
-                                   <IconButton sx={{ marginLeft: 1 }}>
-                                        <EventAvailableIcon color='success' />
-                                   </IconButton>
+                                   <Checkbox label="hoàn thành" defaultChecked sx={{ marginLeft: 2 }} color='success' />
                               </Tooltip>
 
                          </Box>
@@ -481,7 +480,7 @@ function LogWork() {
 
                <Box>
                     <Box display={'flex'} justifyContent={'space-between'} marginTop={2} alignItems={'center'}>
-                         <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Nhật ký công việc ngày {dateRender ? dateRender : ""}</Typography>
+                         <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Nhật ký công việc ngày {dateRender ? dateRender.replace("-", '/').replace("-", '/') : ""}</Typography>
                          <Box display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
                               <Typography sx={{ marginRight: 1 }}>
                                    Tổng thời gian: 7 giờ
@@ -519,46 +518,36 @@ function LogWork() {
                               {
                                    data.map(ele => {
                                         return (
-                                             <TableRow>
-                                                  <StyledTableCell align='center'>{ele.id}</StyledTableCell>
-                                                  <StyledTableCell width={'9%'}>{ele.name}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.ngayduocgiao}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.hanhoanthanh}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.ngayhoanthanh}</StyledTableCell>
-                                                  <StyledTableCell width={'9%'}>{ele.ketqua}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.mucdophuctapcanhan}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.thoigianhoanthanhcanhan}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.mucdohoanthanhcanhan}</StyledTableCell>
-                                                  <StyledTableCell align='center' width={'3%'}>{ele.mucdophuctapdanhgia}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.thoigiandanhgia}</StyledTableCell>
-                                                  <StyledTableCell align='center'>{ele.mucdohoanthanh}</StyledTableCell>
-                                                  <StyledTableCell width={'9%'}>{ele.ketquadanhgia}</StyledTableCell>
-                                                  <StyledTableCell width={'9%'}>{ele.ghichu}</StyledTableCell>
-                                                  <StyledTableCell sx={{ borderLeft: '1px solid #f0f0f0' }}>
-                                                       <IconButton>
-                                                            <EditIcon color={'warning'} onClick={() => { editScroll(ele) }} />
-                                                       </IconButton>
-                                                       <IconButton>
-                                                            <DeleteIcon color={'error'} />
-                                                       </IconButton>
+                                             <TableRow sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""}>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.id}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} width={'9%'}>{ele.name}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.ngayduocgiao}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.hanhoanthanh}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.ngayhoanthanh}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} width={'9%'}>{ele.ketqua}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.mucdophuctapcanhan}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.thoigianhoanthanhcanhan}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.mucdohoanthanhcanhan}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center' width={'3%'}>{ele.mucdophuctapdanhgia}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.thoigiandanhgia}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} align='center'>{ele.mucdohoanthanh}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} width={'9%'}>{ele.ketquadanhgia}</StyledTableCell>
+                                                  <StyledTableCell sx={Number(ele.mucdohoanthanhcanhan) === 100 ? { color: 'green' } : ""} width={'9%'}>{ele.ghichu}</StyledTableCell>
+                                                  <StyledTableCell sx={{ borderLeft: '1px solid #f0f0f0' }} width={'7%'}>
+
+                                                       <EditIcon color={'warning'} onClick={() => { editScroll(ele) }} />
+
+
+                                                       <DeleteIcon color={'error'} />
+
                                                   </StyledTableCell>
                                              </TableRow>
                                         )
                                    })
                               }
-
-
-
-
-
-
                          </TableBody>
                     </Table>
                </Box>
-
-
-
-
                {/* <Box>
                     <Typography marginTop={2} color={'gray'} fontWeight={'bold'} >Báo cáo hôm nay: {date ? date : ""}</Typography>
                     <Table size='small' sx={{ marginTop: 1 }}>
