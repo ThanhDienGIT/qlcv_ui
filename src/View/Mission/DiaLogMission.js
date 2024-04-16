@@ -63,7 +63,7 @@ function DiaLogMission(props) {
 
      return (
           <React.Fragment>
-               <Button variant='contained' size={'small'} sx={{ backgroundColor: '#000080' }} onClick={handleClickOpen}>
+               <Button variant='contained' size={'small'} sx={{ backgroundColor: '#21436b', }} onClick={handleClickOpen}>
                     + Thêm nhiệm vụ
                </Button>
                <Dialog

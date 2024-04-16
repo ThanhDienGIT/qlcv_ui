@@ -35,7 +35,6 @@ function DiaLogEditMission(props) {
                     <DialogTitle>{"Thêm nhiệm vụ"}</DialogTitle>
                     <Box width={800} paddingLeft={3} paddingRight={3}>
                          <Divider sx={{ color: 'black', borderTop: '1px solid black' }} />
-
                     </Box>
                     <DialogContent>
                          <DialogContentText id="alert-dialog-slide-description">
@@ -78,8 +77,10 @@ function DiaLogEditMission(props) {
                          </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                         <Button size='small' variant='contained'>Lưu thay đổi</Button>
-                         <Button size='small' onClick={props.handleCloseEdit} variant='outlined'>Hủy</Button>
+                         <Button size='small' variant='contained' sx={{ backgroundColor: '#21436b' }}>Cập nhật</Button>
+                         <Button size='small' onClick={props.handleCloseEdit} sx={{ border: '1px solid #21436b', color: '#21436b' }} variant='outlined'>
+                              Quay lại
+                         </Button>
                     </DialogActions>
                </Dialog>
           </React.Fragment >

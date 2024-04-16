@@ -21,12 +21,14 @@ import dayjs from 'dayjs'
 import Checkbox from '@mui/joy/Checkbox';
 import BackupIcon from '@mui/icons-material/Backup';
 import SaveIcon from '@mui/icons-material/Save';
+import RefreshIcon from '@mui/icons-material/Refresh';
 function AssignJob() {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#000080',
+               backgroundColor: '#21436b',
                color: 'white',
+               fontWeight: 'bold'
           },
           [`&.${tableCellClasses.body}`]: {
                fontSize: 13,
@@ -35,7 +37,7 @@ function AssignJob() {
 
      const StyledTableRow = styled(TableRow)(({ theme }) => ({
           '&:nth-of-type(odd)': {
-               backgroundColor: '#000080',
+               backgroundColor: '#21436b',
                color: 'white',
           },
           // hide last border
@@ -359,22 +361,27 @@ function AssignJob() {
      }
 
      const [phuctap, setPhuctap] = useState(3)
+     const [hour, setHour] = useState(0)
 
      const handleChangePhucTap = () => {
           if (phuctap === 1) {
-               setDefaultDate(dayjs().add(2, 'day').format('YYYY-MM-DD'))
+               setHour(4)
           }
           if (phuctap === 2) {
-               setDefaultDate(dayjs().add(4, 'day').format('YYYY-MM-DD'))
+               setDefaultDate(dayjs().add(1, 'day').format('YYYY-MM-DD'))
+               setHour(8)
           }
           if (phuctap === 3) {
-               setDefaultDate(dayjs().add(5, 'day').format('YYYY-MM-DD'))
+               setDefaultDate(dayjs().add(2, 'day').format('YYYY-MM-DD'))
+               setHour(16)
           }
           if (phuctap === 4) {
-               setDefaultDate(dayjs().add(10, 'day').format('YYYY-MM-DD'))
+               setDefaultDate(dayjs().add(3, 'day').format('YYYY-MM-DD'))
+               setHour(24)
           }
           if (phuctap === 5) {
-               setDefaultDate(dayjs().add(15, 'day').format('YYYY-MM-DD'))
+               setDefaultDate(dayjs().add(4, 'day').format('YYYY-MM-DD'))
+               setHour(32)
           }
      }
 
@@ -452,10 +459,21 @@ function AssignJob() {
                               <Input sx={{ flex: 2.4 }} size='sm' />
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Box width={'49%'} display={'flex'} alignItems={'center'}>
-                                   <Typography flex={1}>Độ phức tạp: *</Typography>
+                              <Typography flex={1}>Nội dung: *</Typography>
+                              <Textarea sx={{ flex: 2.4 }} size='sm' minRows={2} />
+                         </Box>
+
+                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
+                              <Button size={'sm'} sx={{ border: '1px solid #21436b', color: '#21436b' }} onClick={openCloseCollapse} variant='outlined' startDecorator={<SettingsIcon />}>Nhắc việc định kỳ</Button>
+                         </Box>
+
+                    </Box>
+                    <Box width={'49%'}>
+                         <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
+                              <Box width={'51%'} display={'flex'} alignItems={'center'}>
+                                   <Typography flex={0.95}>Độ phức tạp: *</Typography>
                                    <Select
-                                        sx={{ marginLeft: 1, width: 122 }} size='sm'
+                                        sx={{ marginLeft: 1, width: 140 }} size='sm'
                                         value={phuctap}
                                         onChange={handleChange}
                                    >
@@ -476,26 +494,26 @@ function AssignJob() {
                                         </Option>
                                    </Select>
                               </Box>
-                              <Box width={'51%'} display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
-                                   <Typography >Hạn hoàn thành: *</Typography>
-                                   <Input type='date' value={defaultDate} sx={{ marginLeft: 2 }} onChange={(e) => { setDefaultDate(dayjs(e.target.value).format('YYYY-MM-DD')) }} size='sm' />
+                              <Box width={'49%'} display={'flex'} alignItems={'center'}>
+                                   <Typography flex={0.7}>Số giờ: *</Typography>
+                                   <Input size='sm' type='number' value={hour} />
                               </Box>
+
 
                          </Box>
                          <Box width={'100%'} marginTop={1} display={'flex'} alignItems={'center'}>
-                              <Button size={'sm'} onClick={openCloseCollapse} variant='outlined' startIcon={<SettingsIcon />}>Nhắc việc định kỳ</Button>
+
+                              <Typography flex={0.41}>Hạn hoàn thành: *</Typography>
+                              <Input type='date' value={defaultDate} sx={{ marginLeft: 2, width: 240 }} onChange={(e) => { setDefaultDate(dayjs(e.target.value).format('YYYY-MM-DD')) }} size='sm' />
+
                          </Box>
-
-                    </Box>
-                    <Box width={'49%'}>
-                         <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
-                              <Typography variant='p' flex={0.3}> Văn bản liên quan:</Typography>
-
+                         <FormControl sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', marginTop: 1 }}>
+                              <Typography variant='p' flex={0.32}> Văn bản liên quan:</Typography>
                               <label htmlFor='form' className='cssButton2'>+ Thêm</label>
                               <TextField type='file' size='sm' hidden id='form' />
                          </FormControl>
                          <Box display={'flex'} alignItems={'center'} marginTop={1}>
-                              <Typography variant='p' flex={0.293}>Đính kèm tệp:</Typography>
+                              <Typography variant='p' flex={0.31}>Đính kèm tệp:</Typography>
                               <FormControl sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                    <label htmlFor='form' className='cssButton'> Tải tệp tin  <BackupIcon sx={{ marginLeft: 1 }} /></label>
                                    <TextField type='file' size='sm' hidden id='form' />
@@ -530,7 +548,7 @@ function AssignJob() {
                                    <Box display={'flex'} alignItems={'center'} borderLeft={'1px solid gray'}>
                                         {listHours.map(ele => {
                                              return (
-                                                  < Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
+                                                  <Checkbox label={ele.name} sx={{ marginLeft: 2 }} />
                                              )
                                         })}
                                    </Box>
@@ -591,7 +609,11 @@ function AssignJob() {
                          <Input size={'sm'} sx={{ flex: 2 }} placeholder='Nhập từ khóa tìm kiếm...'
                               startDecorator={<SearchIcon />}
                          />
-                         <Button sx={{ marginLeft: 1 }} size='sm' variant='outlined' >Tìm kiếm</Button>
+                         <Button variant='contained' size='sm' sx={{
+                              backgroundColor: '#21436b', color: 'white', marginLeft: 1
+                         }}>
+                              Tìm kiếm
+                         </Button>
                     </Box>
                     <Box>
                          <TableContainer sx={{ marginTop: 2, marginBottom: 5 }}>
@@ -626,7 +648,7 @@ function AssignJob() {
                                                                       {ele.open ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />}
                                                                  </Box>
                                                             </StyledTableCell>
-                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio /></StyledTableCell>
+                                                            <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio size='small' /></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Checkbox /></StyledTableCell>
                                                             <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> </StyledTableCell>
@@ -644,7 +666,7 @@ function AssignJob() {
                                                                            {element.name}
                                                                       </StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
-                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio /></StyledTableCell>
+                                                                      <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}><Radio size='small' /></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}> <Checkbox /></StyledTableCell>
                                                                       <StyledTableCell align='center' sx={{ borderRight: '1px solid #f2f2f2' }} width={'8.9%'}></StyledTableCell>
@@ -665,15 +687,17 @@ function AssignJob() {
                          </TableContainer>
                     </Box>
                     <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-                         <Button size={'lg'} variant='contained' sx={{ backgroundColor: '#000080', color: 'white' }}>
+                         <Button variant='contained' startDecorator={<SaveIcon />} sx={{
+                              backgroundColor: '#21436b', color: 'white'
+                         }}>
                               Cập nhật
                          </Button>
-                         <Button size={'lg'} variant='outlined' sx={{ marginLeft: 2 }}>Làm mới</Button>
+                         <Button variant='contained' startDecorator={<RefreshIcon />} sx={{ marginLeft: 2, backgroundColor: '#21436b', color: 'white' }}>Làm mới</Button>
                     </Box>
 
 
                </Box>
-          </Box>
+          </Box >
 
      )
 }

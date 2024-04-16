@@ -73,17 +73,17 @@ function AssignmentPrivate() {
                                    InputProps={{
                                         startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
                                    }} />
-                              <Button sx={{ marginLeft: 1 }} variant='outlined' >Tìm kiếm</Button>
+                              <Button sx={{ marginLeft: 1, border: '1px solid #21436b', color: '#21436b' }} variant='outlined' >Tìm kiếm</Button>
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, paddingTop: 0, paddingBottom: 0, border: '1px solid gray' }}>
-                                   <ListItem sx={{ backgroundColor: '#000080', borderBottom: '1px solid gray', height: 35 }}>
+                                   <ListItem sx={{ backgroundColor: '#21436b', borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Tên cá nhân
                                         </ListItemIcon>
                                    </ListItem>
                                    <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        sx={{ borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}
                                         selected={selectedIndex === 0}
                                         onClick={(event) => handleListItemClick(event, 0)}
                                    >
@@ -92,7 +92,7 @@ function AssignmentPrivate() {
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        sx={{ borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}
                                         selected={selectedIndex === 1}
                                         onClick={(event) => handleListItemClick(event, 1)}
                                    >
@@ -101,7 +101,7 @@ function AssignmentPrivate() {
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        sx={{ borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}
                                         selected={selectedIndex === 2}
                                         onClick={(event) => handleListItemClick(event, 2)}
                                    >
@@ -110,7 +110,7 @@ function AssignmentPrivate() {
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        sx={{ borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}
                                         selected={selectedIndex === 3}
                                         onClick={(event) => handleListItemClick(event, 3)}
                                    >
@@ -119,7 +119,7 @@ function AssignmentPrivate() {
                                         </ListItemIcon>
                                    </ListItemButton>
                                    <ListItemButton
-                                        sx={{ borderBottom: '1px solid gray', height: 35 }}
+                                        sx={{ borderBottom: '1px solid gray', height: 35, fontFamily: 'Helvetica Neue' }}
                                         selected={selectedIndex === 4}
                                         onClick={(event) => handleListItemClick(event, 4)}
                                    >
@@ -173,21 +173,21 @@ function AssignmentPrivate() {
                                    InputProps={{
                                         startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
                                    }} />
-                              <Button sx={{ marginLeft: 1 }} variant='outlined' >Tìm kiếm</Button>
+                              <Button sx={{ marginLeft: 1, border: '1px solid #21436b', color: '#21436b' }} variant='outlined' >Tìm kiếm</Button>
                          </Box>
                          <Box>
                               <List component="nav" aria-label="main mailbox folders" sx={{ backgroundColor: 'white', marginTop: 2, border: '1px solid gray', paddingTop: 0, paddingBottom: 0 }}>
-                                   <ListItem sx={{ backgroundColor: '#000080', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                                   <ListItem sx={{ backgroundColor: '#21436b', borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between', fontFamily: 'Helvetica Neue' }}>
                                         <ListItemIcon sx={{ color: 'white' }}>
                                              Danh sách nhiệm vụ
                                         </ListItemIcon>
-                                        <ListItemIcon>
+                                        <ListItemIcon sx={{ color: 'white' }}>
                                              Chọn
                                         </ListItemIcon>
                                    </ListItem>
                                    {listMission && listMission.length > 0 ? listMission.map(ele => {
                                         return (
-                                             <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', display: 'flex', justifyContent: 'space-between' }}>
+                                             <ListItem sx={{ backgroundColor: 'white', fontSize: 15, height: 35, borderBottom: '1px solid gray', fontFamily: 'Helvetica Neue', display: 'flex', justifyContent: 'space-between' }}>
                                                   <ListItemIcon>
                                                        {ele.name}
                                                   </ListItemIcon>

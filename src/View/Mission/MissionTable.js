@@ -15,8 +15,9 @@ function MissionTable(props) {
 
      const StyledTableCell = styled(TableCell)(({ theme }) => ({
           [`&.${tableCellClasses.head}`]: {
-               backgroundColor: '#000080',
+               backgroundColor: '#21436b',
                color: 'white',
+               fontFamily: 'Helvetica Neue'
           },
           [`&.${tableCellClasses.body}`]: {
                fontSize: 13,
@@ -107,7 +108,7 @@ function MissionTable(props) {
                     <Table size='small'>
                          <TableHead >
                               <TableRow >
-                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'}>STT</StyledTableCell>
+                                   <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'5%'}>Stt</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'15%'}>Tên nhiệm vụ</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'33%'}>Mô tả</StyledTableCell>
                                    <StyledTableCell align='center' sx={{ borderRight: '1px solid white' }} width={'13%'}>Lãnh đạo quản lý</StyledTableCell>

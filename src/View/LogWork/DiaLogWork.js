@@ -1,11 +1,10 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box, Card, Divider, MenuItem, Select, TextField, Typography } from '@mui/material';
+import { Box, Card, Divider, MenuItem, Select, TextField, Typography, Button } from '@mui/material';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import FormHelperText from '@mui/joy/FormHelperText';
@@ -17,6 +16,7 @@ import dayjs from 'dayjs';
 import Input from '@mui/joy/Input';
 import Textarea from '@mui/joy/Textarea';
 import { TimeField } from '@mui/x-date-pickers/TimeField';
+import AddIcon from '@mui/icons-material/Add';
 function DiaLogWork() {
      const [open, setOpen] = React.useState(false);
 
@@ -168,8 +168,8 @@ function DiaLogWork() {
 
      return (
           <React.Fragment>
-               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#000080', width: 350 }} onClick={handleClickOpen}>
-                    + Thêm công việc cá nhân
+               <Button size={'small'} variant='contained' sx={{ backgroundColor: '#21436b', width: 190, marginLeft: 1 }} startIcon={<AddIcon />} onClick={handleClickOpen}>
+                    Thêm công việc
                </Button>
                <Dialog
                     open={open}
@@ -240,20 +240,20 @@ function DiaLogWork() {
                                              <TextField size={'small'} placeholder={'Nội dung công việc'} multiline rows={2} sx={{ flex: 3 }} />
                                         </Box>
                                         <Box display={'flex'} marginTop={2} justifyContent={'space-between'}>
-                                             <Box width={'49%'} display={'flex'} alignItems={'center'}>
-                                                  <Typography flex={0.83} >
+                                             <Box width={'50%'} display={'flex'} alignItems={'center'}>
+                                                  <Typography flex={0.8} >
                                                        Hạn hoàn thành: *
                                                   </Typography>
                                                   <TextField size='small' type='date' />
                                              </Box>
-                                             <Box width={'49%'} display={'flex'} alignItems={'center'}>
-                                                  <Typography flex={1}>
+                                             <Box width={'50%'} display={'flex'} alignItems={'center'}>
+                                                  <Typography flex={0.5}>
                                                        Độ phức tạp: *
                                                   </Typography>
 
                                                   <Select
                                                        defaultValue={2}
-                                                       size={'small'} sx={{ flex: 2 }}
+                                                       size={'small'} sx={{ flex: 1 }}
                                                   >
                                                        <MenuItem value={1}>
                                                             1
@@ -281,15 +281,15 @@ function DiaLogWork() {
                                              <Box width={'100%'} marginTop={1} display={'flex'} justifyContent={'space-between'} flexWrap={'wrap'}>
                                                   <Box width={'100%'}>
                                                        <Box display={'flex'} marginBottom={2} flexWrap={'wrap'}>
-                                                            <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'} >
-                                                                 <Button size={'sm'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={yesterday}>
+                                                            <Box width={'100%'} display={'flex'} alignItems={'center'}  >
+                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #21436b', color: '#21436b' }} onClick={yesterday}>
                                                                       {"<"}
                                                                  </Button>
-                                                                 <Input type='date' sx={{ width: 350, marginLeft: 4, marginRight: 4 }} defaultValue={dateRender} value={date} onChange={(e) => {
+                                                                 <Input type='date' sx={{ width: 150, marginLeft: 2, marginRight: 2 }} size='sm' defaultValue={dateRender} value={date} onChange={(e) => {
                                                                       setDate(dayjs(e.target.value).format('YYYY-MM-DD'))
                                                                       setDateRender(dayjs(e.target.value).format('DD-MM-YYYY'))
                                                                  }} />
-                                                                 <Button size={'sm'} variant='outlined' fullWidth sx={{ border: '1px solid #000080', color: '#000080' }} onClick={today}>
+                                                                 <Button size={'small'} variant='outlined' sx={{ border: '1px solid #21436b', color: '#21436b' }} onClick={today}>
                                                                       {">"}
                                                                  </Button>
 
@@ -357,10 +357,10 @@ function DiaLogWork() {
                     </DialogContent>
                     <DialogActions sx={{ paddingBottom: 2 }}>
 
-                         <Button size={'small'} onClick={handleClose} variant='contained' sx={{ backgroundColor: '#052c65', marginRight: 2 }}>
+                         <Button size={'small'} onClick={handleClose} variant='contained' sx={{ backgroundColor: '#21436b', marginRight: 2 }}>
                               Cập nhật
                          </Button>
-                         <Button size={'small'} onClick={handleClose} variant='outlined' sx={{ marginRight: 2 }}>
+                         <Button size={'small'} onClick={handleClose} variant='outlined' sx={{ marginRight: 2, border: '1px solid #21436b', color: '#21436b' }}>
                               Quay lại
                          </Button>
                     </DialogActions>
