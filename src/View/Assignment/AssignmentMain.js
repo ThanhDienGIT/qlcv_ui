@@ -92,10 +92,16 @@ function AssignmentMain() {
 
      return (
           <Box width={'100%'} padding={3} display={'flex'} justifyContent={'center'} flexDirection={'column'}>
-               <Box>
-                    <Typography fontSize={25} sx={{ fontWeight: 'bold' }}>Hãy chọn phòng ban để phân công nhiệm vụ tương ứng</Typography>
-                    <Divider sx={{ borderTop: '1px solid black' }} />
+               <Box display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
+                    <Box>
+                         <Typography fontSize={25} sx={{ fontWeight: 'bold' }}>Hãy chọn phòng ban để phân công nhiệm vụ tương ứng</Typography>
+                    </Box>
+                    <Box>
+                         <Button size='small' variant='contained' sx={{ backgroundColor: '#21436b' }}>Cập nhật</Button>
+                    </Box>
+
                </Box>
+               <Divider sx={{ borderTop: '1px solid black', marginTop: 1 }} />
                <Box width={'100%'} padding={3} display={'flex'} >
 
                     <Box width={'49%'} backgroundColor={'#f7f7f7'} borderRadius={1} padding={2} >
